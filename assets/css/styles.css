@@ -1,0 +1,189 @@
+body{
+    padding:0;
+    margin:0;
+}
+
+h1, h2, h3, p, a{
+    color: white;
+    font-family: Sen;
+}
+
+.search-box{
+    background-color: #000000b5;
+    width: 22%;
+    position: absolute;
+    z-index: 2;
+    /*overflow: hidden;*/
+    height: 100vh;
+    padding: 0em 1% 0 1%;
+    transition: 0.8s;
+    transition-timing-function: ease;
+    transform: translate(0%, 0);
+}
+
+.title{
+    font-family: 'Titillium Web', sans-serif;
+    text-align: center;
+}
+
+.menuTitle{
+    margin: 0em 1em 1em 1em;
+    padding-bottom: .5em;
+    border-bottom: solid white .01em;
+}
+
+#map{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+#menu{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: #000000d9;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+.imgCont{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.imgCont img{
+    width: 100%;
+}
+
+.infoPlace{
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+h2, h3, a{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.infoPlace a{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.selectorCont{
+    width: 100%;
+    text-align: center;
+    flex-direction: row;
+    padding-bottom: 1em;
+}
+
+a{
+    text-decoration: none;
+    padding: .5em;
+}
+
+#menu a p{
+    margin: 1em 0em 1em 0em;
+}
+
+#menu a{
+    font-family: sen;
+    font-size: 13.2px;
+    flex-direction: row;
+    text-align: center;
+    height: 90px;
+    width: 27%;
+}
+
+select{
+    padding: .8em;
+    border-radius: .5em;
+    background-color: #91b4f3;
+    color: #ffffff;
+    border: none;
+    width: 90%;
+    font-family: sen;
+    font-size: 15px;
+}
+
+option{
+    padding: 1em; /*Esto no funciona*/
+}
+
+/*Fucking scrollbar que tampoco funciona!!*/
+  .countriesSelector::-webkit-scrollbar {
+    width: .7em;
+  }
+   
+  .countriesSelector::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+  }
+   
+  .countriesSelector::-webkit-scrollbar-thumb {
+    background-color: #0d575a !important;
+  }
+
+  .countriesSelector::-webkit-scrollbar {
+    width: .7em !important;
+  }
+   
+   
+  .countriesSelector::-webkit-scrollbar-thumb {
+    background-color: #03a9f44f !important;
+  }
+
+
+  .button{
+    position: absolute;
+    z-index: 1;
+    color: white;
+    left:24%;
+    top:2%;
+    background-color: #91b4f3;
+    padding: 1em;
+    border-radius: 0px 10px 10px 0px;
+    transition: 0.8s;
+    transition-timing-function: ease;
+  }
+
+  .backBtn{
+    left: 7%;
+    top: 2%;
+    border-radius: 50%;
+    padding: .4em;
+    border: solid white 2px;
+    background-color: #ffffff00;
+
+  }
+
+.arrow{
+    width: 1em;
+}
+
+.openSideNav{
+    transform: translate(-100%, 0);
+}
+
+.moveSideNav{
+    left:0%;
+}
+
+.hide{
+    display:none;
+    padding: 0;
+}
+
+button{
+    margin-left:60%;
+    margin-top:10%;
+    background-color: #91b4f3;
+    padding: 1em;
+    border-radius: 10px 10px 10px 10px;
+    color: white;
+    border:none;
+}
