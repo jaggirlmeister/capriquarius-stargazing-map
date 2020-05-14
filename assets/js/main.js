@@ -255,7 +255,7 @@ const locationInfo = (marker) =>{
         </div>
         <h3 class="subtitle" id="desc">Description</h3>
         <p id="placeDescription">${description}</p>
-        <a href="${link}" target="_blank" id="placeLink">Website</a>
+        <a href="${link}" target="_blank" id="placeLink">Location's Website</a>
     </div>
    
 
