@@ -149,7 +149,7 @@ const addMarker = (map, marker) => {
         <div class='infoPlace'>
             <h2>${name}</h2>
             <h3>${type}</h3>
-            <a href="${link}" target="_blank">Website</a>
+            <a href="${link}" target="_blank">Location's Website</a>
         </div>
     </div>`;
     

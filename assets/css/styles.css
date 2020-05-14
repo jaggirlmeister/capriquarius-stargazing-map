@@ -46,12 +46,13 @@ h1, h2, h3, p, a{
     padding-top: 1em;
     padding-bottom: 1em;
     background-color: #000000d9;
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
     border-radius: 10px;
+    margin: 0 auto;
 }
 
 .imgCont{
@@ -65,8 +66,9 @@ h1, h2, h3, p, a{
 }
 
 .infoPlace{
-    width: 100%;
+    width: 90%;
     padding-bottom: 15px;
+    margin: 0 auto;
 }
 
 h2, h3, a, #placeDescription{
