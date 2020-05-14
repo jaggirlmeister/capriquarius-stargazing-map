@@ -46,7 +46,7 @@ h1, h2, h3, p, a{
     padding-top: 1em;
     padding-bottom: 1em;
     background-color: #000000d9;
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -66,8 +66,12 @@ h1, h2, h3, p, a{
 }
 
 .infoPlace{
-    width: 90%;
+    width: 100%;
     padding-bottom: 15px;
+}
+
+.infoPlaceSidebar{
+    width: 90%;
     margin: 0 auto;
 }
 

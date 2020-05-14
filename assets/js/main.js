@@ -233,7 +233,7 @@ const locationInfo = (marker) =>{
     <div class='imgCont'>
         <img src="${img}">
     </div>
-    <div class='infoPlace'>
+    <div class='infoPlaceSidebar'>
         <h2 id="placeTitle">${name}</h2>
         <div id="filterWeather">
             <h3 id="weatherConditionSub" class="subtitle">Weather condition</h3>
