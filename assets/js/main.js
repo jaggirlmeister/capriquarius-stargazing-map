@@ -119,6 +119,18 @@ window.initMap = () => {
         }
     });
 
+
+    ///////////////// ADD LOCATIONS
+
+    const addButton = document.querySelector('.add');
+
+    addButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        addLocation();
+    })
+
+    
+
 }
 
 //Función de asincrónica que trae los markers
@@ -149,13 +161,14 @@ const addMarker = (map, marker) => {
         <div class='infoPlace'>
             <h2>${name}</h2>
             <h3>${type}</h3>
-            <a href="${link}" target="_blank">Location's Website</a>
+            <a href="${link}" target="_blank">Website</a>
         </div>
     </div>`;
     
     const infowindow = new google.maps.InfoWindow({
         content: contentString
     });
+
 
     //Agrega la infoWindow al array
     infoWindows.push(infowindow);
@@ -184,6 +197,7 @@ const addMarker = (map, marker) => {
 
     //Styling map with jQuery
     
+    
     const styleWindow = () =>{ 
         const infoWindowEdit = $('.thisWindowHook').parent().parent().parent();
             infoWindowEdit.css({
@@ -199,6 +213,7 @@ const addMarker = (map, marker) => {
                 'padding-bottom' : '10px'
             })
         }
+    
         
         
     //Agrego evento de click en el marker, abre infowindow y cierra los demás
@@ -214,6 +229,13 @@ const addMarker = (map, marker) => {
             
     //Agrego mi nuevo marker (objeto marker, no json marker, a mi array para filtros)
     markersAll.push(markerItem);
+
+    const editButton = document.querySelector('.edit');
+
+    editButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        editLocation(marker);
+    })
 }
 
 //Función que muestra la información del marker en el panel 
@@ -233,7 +255,7 @@ const locationInfo = (marker) =>{
     <div class='imgCont'>
         <img src="${img}">
     </div>
-    <div class='infoPlaceSidebar'>
+    <div class='infoPlace'>
         <h2 id="placeTitle">${name}</h2>
         <div id="filterWeather">
             <h3 id="weatherConditionSub" class="subtitle">Weather condition</h3>
@@ -255,11 +277,8 @@ const locationInfo = (marker) =>{
         </div>
         <h3 class="subtitle" id="desc">Description</h3>
         <p id="placeDescription">${description}</p>
-        <a href="${link}" target="_blank" id="placeLink">Location's Website</a>
-    </div>
-   
-
-    `;
+        <a href="${link}" target="_blank" id="placeLink">Website</a>
+    </div>`;
 
     const back = document.querySelector('#back');
 
@@ -297,7 +316,7 @@ const showData = async (lat, lng) =>{
     for(i=0;i<8;i++){
         cloudsAmount.push(weatherData[i].clouds.all);
         transparencySky.push(weatherData[i].main.humidity);
-        temperature.push(weatherData[i].main.temp);
+        temperature.push(weatherData[i].main.temp.toFixed(1));
         date.push(weatherData[i].dt_txt);
     }
 
@@ -323,6 +342,106 @@ const showData = async (lat, lng) =>{
     </div>
     `
 }
+
+const addLocation = () => {
+    const locationControl = document.querySelector('#locationControl');
+    const filters = document.querySelector('#filtersMenu');
+
+    filters.classList.add('hide');
+    locationControl.classList.remove('hide');
+    
+    locationControl.innerHTML = `
+
+    <div id="locationsOptions">
+        <div id="back" class="button backBtn">
+            <img id="backBtn" class="arrow" src="assets/images/left-arrow-01.svg">
+        </div>
+        <h2>Add a location</h2>
+        <div class="inputDiv">
+            <input type="text" id="latInput" name="" required="">
+            <label>Latitude</label>
+        </div>
+        <div class="inputDiv">
+            <input type="text" id="lngInput" name="" required="">
+            <label>Longitude</label>
+        </div>
+        <div class="inputDiv">
+            <input type="text" id="nameInput" name="" required="">
+            <label>Name</label>
+        </div>
+        <div class="inputDiv">
+            <input type="text" id="countryInput" name="" required="">
+            <label>Country</label>
+        </div>
+        <div class="inputDiv">
+            <input type="text" id="websiteInput" name="" required="">
+            <label>Website</label>
+        </div>
+        <div class="inputDiv">
+            <input type="text" id="typeInput" name="" required="">
+            <label>Type</label>
+        </div>
+        <div class="inputDiv">
+            <textarea type="text" id="descriptionInput" name="" required=""></textarea>
+            <label>Description</label>
+        </div>
+        <input type="submit" value="Submit">
+    </div> 
+    `
+
+    // EDIT BUTTON 
+
+    back.addEventListener('click', () => {
+        locationControl.classList.add('hide');
+        filters.classList.remove('hide');
+    });
+}
+
+const editLocation = (marker) => {
+    const locationControl = document.querySelector('#locationControl');
+    const filters = document.querySelector('#filtersMenu');
+    let locations = [];
+    const {name} = marker;
+    locations.push(name);
+
+    filters.classList.add('hide');
+    locationControl.classList.remove('hide');
+    
+    locationControl.innerHTML = `
+
+    <div id="back" class="button backBtn">
+        <img id="backBtn" class="arrow" src="assets/images/left-arrow-01.svg">
+    </div>
+
+    <div id="locationList">
+    </div>
+    `
+    const list = document.querySelector('#locationList')
+      
+    back.addEventListener('click', () => {
+        locationControl.classList.add('hide');
+        filters.classList.remove('hide');
+    });
+}
+
+/*
+
+<input type="text" id="lng" placeholder="Longitude">
+    
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="country" placeholder="Country">
+    <input type="file" id="img" placeholder="Picture">
+    <input type="url" id="link" placeholder="Website">
+    <textarea id="description" cols="10" rows="10" placeholder="Description"></textarea>
+    <select id="type">
+        <option value="National Park"></option>
+        <option value="Observatory"></option>
+        <option value="Northern Lights"></option>
+        <option value="Nature Reserve"></option>
+        <option value="Recreational Area"></option>
+    </select>
+
+    <button type="button" id="button">Buscar</button>
 
 /*
 
