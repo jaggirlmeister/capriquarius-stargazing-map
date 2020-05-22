@@ -373,5 +373,48 @@ input[type=submit]:hover {
     margin-bottom:1em;
 }
 
+/*Admin*/
 
+.btn{
+    padding: 10px 20px;
+    border-radius: 90px;
+    color: #fff;
+    text-decoration: none;
+}
 
+.green{
+    background-color: #311674;
+}
+
+.blue{
+    background-color: #91b4f3;
+}
+.red{
+    background-color: #805fd3;
+}
+
+a:hover{
+    opacity: .8;
+}
+
+#wrapper{
+padding: 60px 0 40px;
+}
+
+#btn_add_wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.inner{
+    max-width: 1200px;
+    margin: auto;
+}
+
+#list .item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #aad8ffaa;
+}
