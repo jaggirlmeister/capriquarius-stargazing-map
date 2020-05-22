@@ -9,6 +9,7 @@ const fetchParams = (method, data = '') =>{
     const body = data ? {body: JSON.stringify(data)} : {}
     return{
         method:method,
+        mode: 'cors',
         headers: apiHeaders,
         credentials: 'same-origin',
         ...body
@@ -32,7 +33,6 @@ const api = {
 
         return dataInfo;
     }
-
 
 
     //PUT
