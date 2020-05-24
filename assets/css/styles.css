@@ -628,3 +628,6 @@ background-color:rgb(3, 22, 73);
     color:#d8d8d8;
 }
 
+.list_content div h2{
+    margin-bottom:0;
+}
