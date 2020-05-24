@@ -526,10 +526,29 @@ input[type=submit]:hover {
 a:hover{
     opacity: .8;
 }
-
+/*
 #wrapper{
 padding: 60px 0 40px;
 background-color:rgb(3, 22, 73);
+}
+
+*/
+
+#adminControl{
+    background-color: transparent;
+    position: absolute;
+    width: 100%;
+    z-index: 4;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.inner{
+    max-width: 1200px;
+    height: 100vh;
+    margin: auto;
+    overflow-y: scroll;
+    padding: 2em;
 }
 
 #btn_add_wrapper{
@@ -608,3 +627,4 @@ background-color:rgb(3, 22, 73);
     padding:0em 0.8em 0em 0.8em;
     color:#d8d8d8;
 }
+
