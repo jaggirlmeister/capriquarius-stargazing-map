@@ -123,11 +123,64 @@
 
     </div>
 
+    <div id="adminControl" class="hide">
+        <div id="wrapper">
+            <div class="inner">
+                <!--
+                <div id="formWrapper">
+                    <form action="">
+                    <div id="locationsOptions">
+                    <div class="inputDiv">
+                        <input id="form_field_lat" type="text" name="lat" required="">
+                        <label>Latitude</label>
+                    </div>
+                    <div class="inputDiv">
+                        <input id="form_field_lng" type="text" name="lng" required="">
+                        <label>Longitude</label>
+                    </div>
+                    <div class="inputDiv">
+                        <input id="form_field_name" type="text" name="name" required="">
+                        <label>Name</label>
+                    </div>
+                    <div class="inputDiv autocomplete">
+                      <input id="myInput" type="text" name="myCountry" placeholder="Country">
+                    </div>
+                    <div class="inputDiv">
+                        <input type="text" id="websiteInput" name="" required="">
+                        <label>Website</label>
+                    </div>
+                    <div class="inputDiv">
+                        <input type="text" id="typeInput" name="" required="">
+                        <label>Type</label>
+                    </div>
+                    <div class="inputDiv">
+                        <textarea type="text" id="form_field_description" name="description" required=""></textarea>
+                        <label>Description</label>
+                    </div>
+                </div>
+    
+                    <input class="btn blue" id="form_submit" type="submit" name="Send">
+                    </form>
+                </div>
+                -->
+    
+                <div id="btn_add_wrapper">
+                    <a href="#" class="btn blue">Add item</a>
+                </div>
+                <div id="list">
+                    <p>Loading!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="map"></div>
     
     <script src="assets/data/mapStyle.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src='assets/js/main.js'></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeWXseIVXxPlvpniACQWgThEdPBQE1wR8&callback=initMap"></script>
+    <script src='../utils/api.js'></script>
+    <script src='../assets/js/admin.js'></script>
 </body>
 </html>

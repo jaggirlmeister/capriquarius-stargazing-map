@@ -426,11 +426,9 @@ const addLocation = () => {
 
 const showAdminControl = () => {
     const map = document.querySelector('#map');
+    const admin = document.querySelector('#adminControl');
     map.classList.add('blur');
-
-    if(map.classList.contains('blur')){
-        map.classList.remove('blur');
-    }
+    admin.classList.remove("hide");
 }
 
 // AUTOCOMPLETE
