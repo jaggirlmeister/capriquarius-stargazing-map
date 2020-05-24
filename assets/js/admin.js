@@ -9,12 +9,17 @@ const $form_field_type = document.querySelector('#form_field_type');
 const $form_field_name = document.querySelector('#form_field_name');
 
 const dataRow = props => {
-    const {_id, lat, lng, name, type} = props
+    const {_id, lat, lng, name, country, type} = props
 
     return `
         <div class="item">
             <div class="list_content">
+            <div>
                 <h2>${name}</h2>
+            </div>
+            <div class="countriesAdmin">
+                <img class="flags" src="${flags[country]}"><p class="countryAdmin">${country}</p>
+            </div>
             </div>
             <div class="btns_wrapper">
                 <a href="#" data-id="${_id}" class="red btn handleEdit">Edit</a>
@@ -40,8 +45,6 @@ const getLocations = async (id='') => {
 }
 
 getLocations();
-
-
 
 const deleteLocation = async (id) => {
     const result = await api.deleteLocations(id);

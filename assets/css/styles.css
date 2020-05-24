@@ -526,13 +526,17 @@ input[type=submit]:hover {
 a:hover{
     opacity: .8;
 }
-/*
+
 #wrapper{
 padding: 60px 0 40px;
 background-color:rgb(3, 22, 73);
 }
 
-*/
+#btn_add_wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
 
 #adminControl{
     background-color: transparent;
@@ -549,17 +553,6 @@ background-color:rgb(3, 22, 73);
     margin: auto;
     overflow-y: scroll;
     padding: 2em;
-}
-
-#btn_add_wrapper{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 40px;
-}
-
-.inner{
-    max-width: 1200px;
-    margin: auto;
 }
 
 #list .item{
