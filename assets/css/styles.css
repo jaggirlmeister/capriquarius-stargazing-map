@@ -529,13 +529,7 @@ a:hover{
 
 #wrapper{
 padding: 60px 0 40px;
-background-color:rgb(3, 22, 73);
-}
-
-#btn_add_wrapper{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 40px;
+background-color:rgba(3, 22, 73, 0.671);
 }
 
 #adminControl{
@@ -553,6 +547,17 @@ background-color:rgb(3, 22, 73);
     margin: auto;
     overflow-y: scroll;
     padding: 2em;
+}
+
+#btn_add_wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.inner{
+    max-width: 1200px;
+    margin: auto;
 }
 
 #list .item{
