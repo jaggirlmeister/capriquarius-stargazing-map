@@ -69,7 +69,7 @@ h1, h2, h3, p, a, input, label{
     padding-bottom: 15px;
 }
 
-h2, h3, a, #placeDescription{
+h2, h3, a, #placeDescription, .countriesAdmin{
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -503,6 +503,8 @@ input[type=submit]:hover {
                 animation: ball-scale 1s 0.5s ease-in-out infinite; 
 }
 
+/* ADMIN */
+
 .btn{
     padding: 10px 20px;
     border-radius: 90px;
@@ -527,6 +529,7 @@ a:hover{
 
 #wrapper{
 padding: 60px 0 40px;
+background-color:rgb(3, 22, 73);
 }
 
 #btn_add_wrapper{
@@ -591,3 +594,17 @@ padding: 60px 0 40px;
     color: #ffffff;
   }
 
+/* FLAGS */
+
+.flags{
+    width: 30px;
+}
+
+.countriesAdmin{
+    display:flex;
+}
+
+.countryAdmin{
+    padding:0em 0.8em 0em 0.8em;
+    color:#d8d8d8;
+}
