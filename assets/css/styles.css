@@ -608,3 +608,7 @@ background-color:rgb(3, 22, 73);
     padding:0em 0.8em 0em 0.8em;
     color:#d8d8d8;
 }
+
+.list_content div h2{
+    margin-bottom:0;
+}
