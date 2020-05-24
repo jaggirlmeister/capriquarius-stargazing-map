@@ -138,26 +138,12 @@ window.initMap = () => {
         }
     });
 
-
-    /*
-
-    const addButton = document.querySelector('.add');
-
-    addButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        addLocation();
-    })
-
-    */
-
     const adminBtn = document.querySelector('#controlAdmin');
-
     adminBtn.addEventListener('click', (e) => {
         e.preventDefault();
         showAdminControl();
+        
     })
-
-    
 
 }
 
@@ -268,12 +254,12 @@ const addMarker = (map, marker) => {
     addButton.addEventListener('click', (e) => {
         e.preventDefault();
         addLocation(marker);
+        autocomplete(document.getElementById("countryInput"), countries);
     })
 }
 
 //Función que muestra la información del marker en el panel 
 const locationInfo = (marker) =>{
-    console.log(":3");
     const { lat, lng, name, country, img, link, description, type } = marker;
     const filters = document.querySelector('#filtersMenu');
     const info = document.querySelector('#locationInfo');
@@ -387,7 +373,7 @@ const showData = async (lat, lng) =>{
 const addLocation = () => {
     const locationControl = document.querySelector('#locationControl');
     const filters = document.querySelector('#filtersMenu');
-
+     
     filters.classList.add('hide');
     locationControl.classList.remove('hide');
     
@@ -410,9 +396,8 @@ const addLocation = () => {
             <input type="text" id="nameInput" name="" required="">
             <label>Name</label>
         </div>
-        <div class="inputDiv">
-            <input type="text" id="countryInput" name="" required="">
-            <label>Country</label>
+        <div class="inputDiv autocomplete">
+          <input id="myInput" type="text" name="myCountry" placeholder="Country">
         </div>
         <div class="inputDiv">
             <input type="text" id="websiteInput" name="" required="">
@@ -430,6 +415,7 @@ const addLocation = () => {
     </div> 
     `
 
+    autocomplete(document.getElementById("myInput"), countries);
     const back = document.querySelector("#back_locationsOptions");
 
     back.addEventListener('click', () => {
@@ -441,4 +427,85 @@ const addLocation = () => {
 const showAdminControl = () => {
     const map = document.querySelector('#map');
     map.classList.add('blur');
+
+    if(map.classList.contains('blur')){
+        map.classList.remove('blur');
+    }
 }
+
+// AUTOCOMPLETE
+
+function autocomplete(inp, arr) {
+    var currentFocus;
+    inp.addEventListener("input", function(e) {
+        var countriesContainer, countryItem, i, val = this.value; // this agarra el value que se ingresa en el input (this toma el valor de quien lo llama como eventListener, en este caso el input.)
+        closeAllLists();
+        if (!val) { return false;}
+        currentFocus = -1;
+        countriesContainer = document.createElement("DIV");
+        countriesContainer.setAttribute("id", this.id + "autocomplete-list");
+        countriesContainer.setAttribute("class", "autocomplete-items");
+        this.parentNode.appendChild(countriesContainer); // Agrega el container dentro del padre de this (el input para seleccionar país. Lo agrega dentro del div con la class "autocomplete" (padre del input que se está usando))
+
+        for (i = 0; i < arr.length; i++) {
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            countryItem = document.createElement("DIV");
+            countryItem.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            countryItem.innerHTML += arr[i].substr(val.length);
+            countryItem.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            countryItem.addEventListener("click", function(e) {
+                inp.value = this.getElementsByTagName("input")[0].value;
+                closeAllLists();
+            });
+            countriesContainer.appendChild(countryItem);
+          }
+        }
+    });
+
+    
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        console.log(x);
+        if (e.keyCode == 40) {
+          currentFocus++;
+          addActive(x);
+        } else if (e.keyCode == 38) { 
+          currentFocus--;
+          addActive(x);
+        } else if (e.keyCode == 13) {
+          e.preventDefault();
+          if (currentFocus > -1) {
+            if (x) x[currentFocus].click();
+          }
+        }
+    });
+
+    function addActive(x) {
+      if (!x) return false;
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+
+    function removeActive(x) {
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    
+    function closeAllLists(elmnt) {
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+

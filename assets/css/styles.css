@@ -356,10 +356,12 @@ input[type=text]:focus {
     font-weight: bold;
 }
 
+
 .inputDiv input:valid, 
 .inputDiv label:valid{
     border-bottom: 2px solid #91b4f3;
 }
+
 
 input[type=submit] {
     background-color: #91b4f3;
@@ -402,7 +404,7 @@ input[type=submit]:hover {
     transition: 2s;
 }
 
-/* LOADING :3 */
+/* LOADING */
 
 .loader {
     box-sizing: border-box;
@@ -551,3 +553,41 @@ padding: 60px 0 40px;
 .item:hover{
     background-color: #ffffff08;
 }
+
+/* AUTOCOMPLETE */
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+  }
+
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    font-family: Sen;
+  }
+
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+  }
+  .autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: #91b4f3 !important;
+    color: #ffffff;
+  }
+
