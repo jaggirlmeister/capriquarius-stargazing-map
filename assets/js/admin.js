@@ -9,7 +9,7 @@ const $form_field_type = document.querySelector('#form_field_type');
 const $form_field_name = document.querySelector('#form_field_name');
 
 const dataRow = props => {
-    const {_id, lat, lng, name, country, type, description} = props
+    const {_id, lat, lng, name, country, type, link, description} = props
 
     return `
         <div class="item">
@@ -35,12 +35,14 @@ const dataRow = props => {
                 <div id="formWrapper">
                 <form action="">
                 <div id="locationsOptions">
+
                 <div class="inputDiv latLng">
-                    <input id="form_field_lat" type="text" name="lat" required="">
+                    <input id="form_field_lat" type="text" name="lat" required="" value="${lat}">
                     <label>Latitude</label>
                 </div>
+
                 <div class="inputDiv latLng">
-                    <input id="form_field_lng" type="text" name="lng" required="">
+                    <input id="form_field_lng" type="text" name="lng" required="" value="${lng}">
                     <label>Longitude</label>
                 </div>
 
@@ -51,29 +53,42 @@ const dataRow = props => {
                     </div>
                     <div class="inlineInput">
                         <input type="radio" id="recPark" name="type">
-                        <label>Recreational Park</label>
+                        <label>Recreational Area</label>
                     </div>    
                     <div class="inlineInput">
                         <input type="radio" id="natPark" name="type">
-                        <label>Natural Preserve</label>
+                        <label>Natural Reserve</label>
+                    </div>
+                    <div class="inlineInput">
+                        <input type="radio" id="natPark" name="type">
+                        <label>Observatory</label>
+                    </div>
+                    <div class="inlineInput">
+                        <input type="radio" id="natPark" name="type">
+                        <label>Aurora</label>
                     </div>
                 </div>
 
                 <div class="inputDiv">
-                    <input id="form_field_name" type="text" name="name" required="">
+                    <input id="form_field_name" type="text" name="name" required="" value="${name}">
                     <label>Name</label>
                 </div>
+
                 <div class="inputDiv autocomplete">
-                <input id="myInput" type="text" name="myCountry" placeholder="Country">
+                    <input id="myInput" type="text" name="myCountry" value="${country}">
+                    <label>Country</label>
                 </div>
+
                 <div class="inputDiv">
-                    <input type="text" id="websiteInput" name="" required="">
+                    <input type="text" id="websiteInput" name="" required="" value="${link}">
                     <label>Website</label>
                 </div>
+
                 <div class="inputDiv">
-                    <textarea type="text" id="form_field_description" name="description" required=""></textarea>
+                    <textarea type="text" id="form_field_description" name="description" required="">${description}</textarea>
                     <label>Description</label>
                 </div>
+
             </div>
 
                 <input class="btn blue submitBtn" id="form_submit" type="submit" name="Send">

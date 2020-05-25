@@ -143,7 +143,6 @@ window.initMap = () => {
     adminBtn.addEventListener('click', (e) => {
         e.preventDefault();
         showAdminControl();
-        
     })
 
 }
@@ -259,12 +258,14 @@ const addMarker = (map, marker) => {
     //Agrego mi nuevo marker (objeto marker, no json marker, a mi array para filtros)
     markersAll.push(markerItem);
 
+    /*
     const addButton = document.querySelector('.add');
     addButton.addEventListener('click', (e) => {
         e.preventDefault();
         addLocation(marker);
         autocomplete(document.getElementById("countryInput"), countries);
     })
+    */
 }
 
 //Función que muestra la información del marker en el panel 
@@ -379,6 +380,7 @@ const showData = async (lat, lng) =>{
     `
 }
 
+/*
 const addLocation = () => {
     const locationControl = document.querySelector('#locationControl');
     const filters = document.querySelector('#filtersMenu');
@@ -432,6 +434,7 @@ const addLocation = () => {
         filters.classList.remove('hide');
     });
 }
+*/
 
 const showAdminControl = () => {
     const map = document.querySelector('#map');

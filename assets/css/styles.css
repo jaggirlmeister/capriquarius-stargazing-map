@@ -3,7 +3,7 @@ body{
     margin:0;
 }
 
-h1, h2, h3, p, a, input, label{
+h1, h2, h3, p, a, input, label, textarea{
     color: white;
     font-family: Sen;
 }
@@ -310,8 +310,7 @@ option{
 }
 
 #locationsOptions div{
-    margin-left: 3em;
-    margin-right: 3em;
+    margin:0em 3em 1em 3em;
 }
 
 .latLng{
@@ -381,9 +380,9 @@ input[type=text]:focus {
 .inputDiv input:valid ~ label,
 .inputDiv textarea:focus ~ label, 
 .inputDiv textarea:valid ~ label {
-    top: 0px !important;
+    top: -10px !important;
     left: 0px !important;
-    font-size:0.8em;
+    font-size:1em;
     color: #91b4f3;
     font-weight: bold;
 }
@@ -402,6 +401,10 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: #5f86ce;
+}
+
+textarea{
+    font-size: 1em;
 }
 
 #locationsOptions h2{
