@@ -35,14 +35,30 @@ const dataRow = props => {
                 <div id="formWrapper">
                 <form action="">
                 <div id="locationsOptions">
-                <div class="inputDiv">
+                <div class="inputDiv latLng">
                     <input id="form_field_lat" type="text" name="lat" required="">
                     <label>Latitude</label>
                 </div>
-                <div class="inputDiv">
+                <div class="inputDiv latLng">
                     <input id="form_field_lng" type="text" name="lng" required="">
                     <label>Longitude</label>
                 </div>
+
+                <div class="">
+                    <div class="inlineInput">
+                        <input type="radio" id="typeInput" name="type">
+                        <label>National Park</label>
+                    </div>
+                    <div class="inlineInput">
+                        <input type="radio" id="recPark" name="type">
+                        <label>Recreational Park</label>
+                    </div>    
+                    <div class="inlineInput">
+                        <input type="radio" id="natPark" name="type">
+                        <label>Natural Preserve</label>
+                    </div>
+                </div>
+
                 <div class="inputDiv">
                     <input id="form_field_name" type="text" name="name" required="">
                     <label>Name</label>
@@ -55,16 +71,12 @@ const dataRow = props => {
                     <label>Website</label>
                 </div>
                 <div class="inputDiv">
-                    <input type="text" id="typeInput" name="" required="">
-                    <label>Type</label>
-                </div>
-                <div class="inputDiv">
                     <textarea type="text" id="form_field_description" name="description" required=""></textarea>
                     <label>Description</label>
                 </div>
             </div>
 
-                <input class="btn blue" id="form_submit" type="submit" name="Send">
+                <input class="btn blue submitBtn" id="form_submit" type="submit" name="Send">
                 </form>
             </div>
             </div>
