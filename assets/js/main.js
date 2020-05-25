@@ -178,7 +178,7 @@ const addMarker = (map, marker) => {
             <h2>${name}</h2>
             <h3>${type}</h3>
             <a href="${link}" target="_blank">Website</a>
-            <button class="moreInformation">Show me more, ami</button>
+            <button class="moreInformation">More</button>
         </div>
     </div>`;
     
