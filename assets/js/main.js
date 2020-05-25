@@ -431,18 +431,35 @@ const showAdminControl = () => {
     const openSideNav= document.querySelector('#control');
     const sideNav = document.querySelector('.search-box');
     const closeBtn = document.querySelector('#close');
+    const adminBtn = document.querySelector('#controlAdmin');
+
+    const downBtn = document.querySelectorAll('.down');
+    const descriptionAdmin = document.querySelector('.adminDescription')
 
     openSideNav.classList.add("hide");
     sideNav.classList.add("hide");
     map.classList.add('blur');
     admin.classList.remove("hide");
+    adminBtn.classList.add("hide");
     
     closeBtn.addEventListener('click', () => {
         openSideNav.classList.remove("hide");
         sideNav.classList.remove("hide");
         map.classList.remove('blur');
         admin.classList.add("hide");
+        adminBtn.classList.remove("hide");
     });
+
+    downBtn.forEach(button => {
+        button.addEventListener('click', () => {
+            if(descriptionAdmin.classList.contains('hide')){
+                descriptionAdmin.classList.remove("hide");
+            } else {
+                descriptionAdmin.classList.add('hide');
+            }
+        });
+    });
+    
 }
 
 // AUTOCOMPLETE
