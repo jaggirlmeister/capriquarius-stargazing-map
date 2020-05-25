@@ -202,16 +202,6 @@ option{
 }
 
 
-button{
-    margin-left:60%;
-    background-color: #91b4f3;
-    padding: 1em;
-    border-radius: 10px 10px 10px 10px;
-    color: white;
-    border:none;
-}
-
-
 #placeDescription{
     font-size:0.9em;
     line-height: 18px;
