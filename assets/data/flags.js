@@ -1,4 +1,5 @@
 let flags = {};
+flags["Antarctica"] = "assets/images/Antarctica.svg";
 flags["Argentina"] = "assets/images/Argentina.svg";
 flags["Australia"] = "assets/images/Australia.svg";
 flags["Bolivia"] = "assets/images/Bolivia.svg";
