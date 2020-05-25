@@ -30,43 +30,8 @@ const dataRow = props => {
                 <a href="#" data-id="${_id}" class="red btn handleEdit">Edit</a>
                 <a href="#" data-id="${_id}" class="green btn handleDelete">Delete</a>
             </div>
-
             <div class="adminDescription hide">
-                <div id="formWrapper">
-                <form action="">
-                <div id="locationsOptions">
-                <div class="inputDiv">
-                    <input id="form_field_lat" type="text" name="lat" required="">
-                    <label>Latitude</label>
-                </div>
-                <div class="inputDiv">
-                    <input id="form_field_lng" type="text" name="lng" required="">
-                    <label>Longitude</label>
-                </div>
-                <div class="inputDiv">
-                    <input id="form_field_name" type="text" name="name" required="">
-                    <label>Name</label>
-                </div>
-                <div class="inputDiv autocomplete">
-                <input id="myInput" type="text" name="myCountry" placeholder="Country">
-                </div>
-                <div class="inputDiv">
-                    <input type="text" id="websiteInput" name="" required="">
-                    <label>Website</label>
-                </div>
-                <div class="inputDiv">
-                    <input type="text" id="typeInput" name="" required="">
-                    <label>Type</label>
-                </div>
-                <div class="inputDiv">
-                    <textarea type="text" id="form_field_description" name="description" required=""></textarea>
-                    <label>Description</label>
-                </div>
-            </div>
-
-                <input class="btn blue" id="form_submit" type="submit" name="Send">
-                </form>
-            </div>
+                <p>${description}</p>
             </div>
         </div>
     `

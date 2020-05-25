@@ -462,8 +462,11 @@ const showAdminControl = () => {
         button.addEventListener('click', () => {
             if(descriptionAdmin[index].classList.contains('hide')){
                 descriptionAdmin[index].classList.remove("hide");
+                //console.log(this);
+                //downBtn.classList.add('rotate');
             } else {
                 descriptionAdmin[index].classList.add('hide');
+                //downBtn.classList.remove('rotate');
             }
         });
     });
