@@ -434,7 +434,7 @@ const showAdminControl = () => {
     const adminBtn = document.querySelector('#controlAdmin');
 
     const downBtn = document.querySelectorAll('.down');
-    const descriptionAdmin = document.querySelector('.adminDescription')
+    const descriptionAdmin = document.querySelectorAll('.adminDescription')
 
     openSideNav.classList.add("hide");
     sideNav.classList.add("hide");
@@ -450,12 +450,12 @@ const showAdminControl = () => {
         adminBtn.classList.remove("hide");
     });
 
-    downBtn.forEach(button => {
+    downBtn.forEach((button,index) => {
         button.addEventListener('click', () => {
-            if(descriptionAdmin.classList.contains('hide')){
-                descriptionAdmin.classList.remove("hide");
+            if(descriptionAdmin[index].classList.contains('hide')){
+                descriptionAdmin[index].classList.remove("hide");
             } else {
-                descriptionAdmin.classList.add('hide');
+                descriptionAdmin[index].classList.add('hide');
             }
         });
     });
