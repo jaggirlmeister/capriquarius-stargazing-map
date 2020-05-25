@@ -183,6 +183,25 @@ option{
     display:none;
     padding: 0;
 }
+
+#moreInfoBtn{
+    position: absolute;
+    background-color:#6697ef;
+    padding: 1em;
+    right: 0;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    margin: 1em;
+    bottom: 0;
+    transition: .7s;
+}
+
+#moreInfoBtn:hover{
+    background-color: #7ba4ed;
+}
+
+
 button{
     margin-left:60%;
     background-color: #91b4f3;
@@ -191,6 +210,8 @@ button{
     color: white;
     border:none;
 }
+
+
 #placeDescription{
     font-size:0.9em;
     line-height: 18px;
@@ -302,7 +323,7 @@ button{
 
 input{
     color: white;
-    background-color: #000000d9;
+    background-color: #5f76ab1f;
     border: none;
     outline: none;
     width: 100%;

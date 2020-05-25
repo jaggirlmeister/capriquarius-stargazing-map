@@ -178,7 +178,7 @@ const addMarker = (map, marker) => {
             <h2>${name}</h2>
             <h3>${type}</h3>
             <a href="${link}" target="_blank">Website</a>
-            <button class="moreInformation">More</button>
+            <button class="moreInformation">Show me more, ami</button>
         </div>
     </div>`;
     
@@ -228,6 +228,14 @@ const addMarker = (map, marker) => {
                 'overflow' : 'hidden',
                 'padding-bottom' : '10px'
             })
+            const XBtn = infoWindowEdit.children('button').eq(0);
+            XBtn.css({
+                'background-color' : 'red',
+                'width': 'auto',
+                'top' : '0',
+                'right' : '0',
+                'background' : '#6697ef'
+            });
             const moreInfoBtn = document.querySelector('.moreInformation'); 
             moreInfoBtn.addEventListener('click', (e) => { 
                 e.preventDefault();
