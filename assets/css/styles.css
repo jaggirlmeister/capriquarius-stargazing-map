@@ -370,12 +370,26 @@ input[type=text]:focus {
 
 #locationsOptions .inputDiv label{
     position: absolute;
+    top: -10px;
+    pointer-events: none;
+    left:0%; 
+    transition: .5s;
+    font-size:1em;
+    color: #91b4f3;
+    font-weight: bold;
+}
+
+/*
+#locationsOptions .inputDiv label{
+    position: absolute;
     top: 28px;
     pointer-events: none;
     left:3%; 
     transition: .5s;
 }
+*/
 
+/*
 .inputDiv input:focus ~ label, 
 .inputDiv input:valid ~ label,
 .inputDiv textarea:focus ~ label, 
@@ -386,7 +400,7 @@ input[type=text]:focus {
     color: #91b4f3;
     font-weight: bold;
 }
-
+*/
 
 .inputDiv input:valid, 
 .inputDiv label:valid{
