@@ -12,14 +12,14 @@ const $form_field_website = document.querySelector('#form_field_website');
 const $form_field_country = document.querySelector('#form_field_country');
 */
 
-const dataRow = props => {
+const dataRow = (props, index) => {
     const {_id, lat, lng, name, country, type, img, link, description} = props
 
     return `
         <div class="item">
             <div class="countriesAdmin">
-                <div class="countriesAdmin">
-                    <img class="down" data-id="true" src="assets/images/down.svg" width="25px">
+                <div id="arrow-${index}" data="false" class="countriesAdmin">
+                    <img class="down" src="assets/images/down.svg" width="25px">
                 </div>
                 <div class="list_content">
                     <div>
@@ -35,7 +35,7 @@ const dataRow = props => {
                 <a href="#" data-id="${_id}" class="green btn handleDelete">Delete</a>
             </div>
 
-            <div class="adminDescription hide">
+            <div id="data-${index}" class="adminDescription hide">
                 <div id="formWrapper">
                 <form action="">
                 <div id="locationsOptions">
@@ -114,8 +114,8 @@ const getLocations = async (id='') => {
     console.log(result)
     if(id == ''){
         $list.innerHTML = '';
-        result.forEach(element => {
-            $list.innerHTML += dataRow(element)
+        result.forEach((element, index) => {
+            $list.innerHTML += dataRow(element, index);
         });
     }else{
         const elementByID= result.find(el => id == el._id)

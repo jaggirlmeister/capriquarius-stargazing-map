@@ -1,7 +1,7 @@
 let markersAll = []; //array con todos los markers
 let infoWindows = []; //array con todas las infoWindow
 let countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
-
+let flag = false;
 
 //Inicializo el mapa (callback en script google api en index.html)
 window.initMap = () => {
@@ -443,7 +443,7 @@ const showAdminControl = () => {
     const sideNav = document.querySelector('.search-box');
     const closeBtn = document.querySelector('#close');
     const adminBtn = document.querySelector('#controlAdmin');
-
+    
     const downBtn = document.querySelectorAll('.down');
     const descriptionAdmin = document.querySelectorAll('.adminDescription')
 
@@ -461,18 +461,88 @@ const showAdminControl = () => {
         adminBtn.classList.remove("hide");
     });
 
-    downBtn.forEach((button,index) => {
-        button.addEventListener('click', () => {
-            if(descriptionAdmin[index].classList.contains('hide')){
-                descriptionAdmin[index].classList.remove("hide");
-                //console.log(this);
-                //downBtn.classList.add('rotate');
-            } else {
-                descriptionAdmin[index].classList.add('hide');
-                //downBtn.classList.remove('rotate');
-            }
+    /*
+    const showInfo = (index) =>{
+        if(descriptionAdmin[index].classList.contains('hide')){
+            descriptionAdmin[index].classList.remove("hide");
+            console.log("Saco la clase hide");
+            //downBtn.classList.add('rotate');
+        } else {
+            descriptionAdmin[index].classList.add('hide');
+            console.log("Agrego hide");
+            //downBtn.classList.remove('rotate');
+        }
+    }
+    */
+    
+    const showInfo = (index) =>{
+        flag = true;
+        /*
+        const $check = document.querySelector('#arrow-'+index);
+        const attr = $check.getAttribute("data");
+        const $div = document.querySelector('#data-'+index);
+
+        if(attr == "false"){
+            
+                $div.classList.remove("hide");
+                console.log($div)
+                $check.setAttribute("data", "true");
+                
+        } else{
+                $div.classList.add("hide");
+                console.log($div)
+                $check.setAttribute("data", "false");
+        }
+        */
+        if(descriptionAdmin[index].classList.contains('hide')){
+            descriptionAdmin[index].classList.remove("hide");
+        //downBtn.classList.add('rotate');
+        } else {
+            descriptionAdmin[index].classList.add('hide');
+        //downBtn.classList.remove('rotate');
+        }
+    }
+
+    if(flag == false){
+        downBtn.forEach((button,index) => {
+            button.addEventListener('click', (e) => { 
+                showInfo(index);
+            }); 
         });
+    } 
+    
+
+    /*
+    downBtn.forEach((button,index) => {
+            if(flag == false){
+                button.addEventListener('click', (e) => { 
+                    a(index);
+                }); 
+                flag = true;
+            } else {
+                a(index);
+            }
+         
     });
+    */
+
+    
+
+
+    /*
+
+    downBtn[0].addEventListener('click', () => {
+
+        if(descriptionAdmin[0].classList.contains('hide')){
+            descriptionAdmin[0].classList.remove("hide");
+            console.log("Saco la clase hide");
+        } else {
+            descriptionAdmin[0].classList.add('hide');
+            console.log("Agrego hide");
+        }
+    });
+
+    */
     
 }
 
