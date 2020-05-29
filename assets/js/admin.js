@@ -107,9 +107,8 @@ const dataRow = (props, index) => {
         </div>
     `
 }
-
+//READ
 const getLocations = async (id='') => {
-    
     const result = await api.getLocations();
     console.log(result)
     if(id == ''){
@@ -163,13 +162,19 @@ const editForm = (id) =>{
 }
 
 
+const confirmation = (id) =>{
+    const $confirmationWindow = document.getElementById('#confirmationWindow');
+    $confirmationWindow.removeAttribute('hide');
+}
+
+
 //Handle Delete
 document.addEventListener('click', function(){
     event.preventDefault();
     if(event.target.matches('.handleDelete')){
         const id = event.target.dataset.id;
         console.log('clickeado en el delete', id);
-        deleteLocation(id);
+        confirmation(id);
     }
 
     //Handle Edit
