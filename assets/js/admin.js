@@ -169,17 +169,11 @@ const confirmation = (id) =>{
 
 
 //Handle Delete
-document.addEventListener('click', function(){
-    event.preventDefault();
-    if(event.target.matches('.handleDelete')){
-        const id = event.target.dataset.id;
-        console.log('clickeado en el delete', id);
-        confirmation(id);
-    }
 
     //Handle Edit
     if(event.target.matches('.handleEdit')){
         const id = event.target.dataset.id;
+        console.log(id);
         editForm(id)
         /*
         const reg = await getLocations(id);
@@ -188,5 +182,12 @@ document.addEventListener('click', function(){
        */
     }
     
+    document.addEventListener('click', function(){
+        event.preventDefault();
+        if(event.target.matches('.handleDelete')){
+            const id = event.target.dataset.id;
+            console.log('clickeado en el delete', id);
+            confirmation(id);
+        }
 
 }, false)
