@@ -2,6 +2,7 @@ let markersAll = []; //array con todos los markers
 let infoWindows = []; //array con todas las infoWindow
 let countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 let flag = false;
+let types = [];
 
 //Inicializo el mapa (callback en script google api en index.html)
 window.initMap = () => {
@@ -96,15 +97,12 @@ window.initMap = () => {
     // Filtro para los paises
     countryFilter.addEventListener('change', (e) => {
         e.preventDefault();
-        console.log(countryFilter.value);
         addMarkerFilteredByCountry(countryFilter.value);
     })
 
     // Agrega los markers filtrados por país
     const addMarkerFilteredByCountry = (country) => {
-        console.log('clicked beer');
         markersAll.forEach((marker) => {
-            //console.log(marker)
             marker.setMap(null); //Quita todos los markers del mapa
         })
         const filterByCountry = markersAll.filter((markerItem) => markerItem.country === country)
@@ -115,9 +113,7 @@ window.initMap = () => {
 
     //Agrego los markers filtrados según filtro (markerType)
     const addMarkerFiltered = (markerType) => {
-        console.log('clicked beer');
         markersAll.forEach((marker) => {
-            //console.log(marker)
             marker.setMap(null); //Quita todos los markers del mapa
         })
         const markerFiltered = markersAll.filter((markerItem) => markerItem.customInfo === markerType)
@@ -142,9 +138,8 @@ window.initMap = () => {
     const adminBtn = document.querySelector('#controlAdmin');
     adminBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showAdminControl();
+        showAdminControl(types);
     })
-
 }
 
 //Función de asincrónica que trae los markers
@@ -155,7 +150,6 @@ const fetchMarkers = async (map) => {
         json.forEach(marker => {
             addMarker(map, marker);
         });
-        //console.log(markersAll)
     } catch (error) {
         console.log(error);
     }
@@ -257,6 +251,8 @@ const addMarker = (map, marker) => {
             
     //Agrego mi nuevo marker (objeto marker, no json marker, a mi array para filtros)
     markersAll.push(markerItem);
+    types.push(type);
+    
 
     /*
     const addButton = document.querySelector('.add');
@@ -341,7 +337,6 @@ const fetchForecast = async (lat, lng) => {
     const response = await fetch(proxyurl + url);
     const json = await response.json();
     const {list} = json;
-    console.log(url);
     return list
 }
 
@@ -436,7 +431,7 @@ const addLocation = () => {
 }
 */
 
-const showAdminControl = () => {
+const showAdminControl = (types) => {
     const map = document.querySelector('#map');
     const admin = document.querySelector('#adminControl');
     const openSideNav= document.querySelector('#control');
@@ -494,6 +489,8 @@ const showAdminControl = () => {
                 $check.setAttribute("data", "false");
         }
         */
+        checkType(types[index], index);
+
         if(descriptionAdmin[index].classList.contains('hide')){
             descriptionAdmin[index].classList.remove("hide");
         //downBtn.classList.add('rotate');
@@ -510,40 +507,7 @@ const showAdminControl = () => {
             }); 
         });
     } 
-    
-
-    /*
-    downBtn.forEach((button,index) => {
-            if(flag == false){
-                button.addEventListener('click', (e) => { 
-                    a(index);
-                }); 
-                flag = true;
-            } else {
-                a(index);
-            }
-         
-    });
-    */
-
-    
-
-
-    /*
-
-    downBtn[0].addEventListener('click', () => {
-
-        if(descriptionAdmin[0].classList.contains('hide')){
-            descriptionAdmin[0].classList.remove("hide");
-            console.log("Saco la clase hide");
-        } else {
-            descriptionAdmin[0].classList.add('hide');
-            console.log("Agrego hide");
-        }
-    });
-
-    */
-    
+       
 }
 
 // AUTOCOMPLETE
