@@ -3,6 +3,7 @@ let infoWindows = []; //array con todas las infoWindow
 let countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 let flag = false;
 let types = [];
+let ids = [];
 
 //Inicializo el mapa (callback en script google api en index.html)
 window.initMap = () => {
@@ -138,7 +139,7 @@ window.initMap = () => {
     const adminBtn = document.querySelector('#controlAdmin');
     adminBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showAdminControl(types);
+        showAdminControl(types, ids);
     })
 }
 
@@ -158,7 +159,7 @@ const fetchMarkers = async (map) => {
 //Función de agregado de un marker
 const addMarker = (map, marker) => { 
     //Destructuring de la info del marker
-    const { lat, lng, name, country, img, link, description, type } = marker;
+    const { _id, lat, lng, name, country, img, link, description, type } = marker;
     //let markerData = JSON.stringify(marker);
 
     //Armo la infowindow
@@ -252,16 +253,8 @@ const addMarker = (map, marker) => {
     //Agrego mi nuevo marker (objeto marker, no json marker, a mi array para filtros)
     markersAll.push(markerItem);
     types.push(type);
+    ids.push(_id);
     
-
-    /*
-    const addButton = document.querySelector('.add');
-    addButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        addLocation(marker);
-        autocomplete(document.getElementById("countryInput"), countries);
-    })
-    */
 }
 
 //Función que muestra la información del marker en el panel 
@@ -375,63 +368,7 @@ const showData = async (lat, lng) =>{
     `
 }
 
-/*
-const addLocation = () => {
-    const locationControl = document.querySelector('#locationControl');
-    const filters = document.querySelector('#filtersMenu');
-     
-    filters.classList.add('hide');
-    locationControl.classList.remove('hide');
-    
-    locationControl.innerHTML = `
-
-    <div id="locationsOptions">
-        <div id="back_locationsOptions" class="button backBtn">
-            <img id="backBtn" class="arrow" src="assets/images/left-arrow-01.svg">
-        </div>
-        <h2>Add a location</h2>
-        <div class="inputDiv">
-            <input type="text" id="latInput" name="" required="">
-            <label>Latitude</label>
-        </div>
-        <div class="inputDiv">
-            <input type="text" id="lngInput" name="" required="">
-            <label>Longitude</label>
-        </div>
-        <div class="inputDiv">
-            <input type="text" id="nameInput" name="" required="">
-            <label>Name</label>
-        </div>
-        <div class="inputDiv autocomplete">
-          <input id="myInput" type="text" name="myCountry" placeholder="Country">
-        </div>
-        <div class="inputDiv">
-            <input type="text" id="websiteInput" name="" required="">
-            <label>Website</label>
-        </div>
-        <div class="inputDiv">
-            <input type="text" id="typeInput" name="" required="">
-            <label>Type</label>
-        </div>
-        <div class="inputDiv">
-            <textarea type="text" id="descriptionInput" name="" required=""></textarea>
-            <label>Description</label>
-        </div>
-        <input type="submit" value="Submit">
-    </div> 
-    `
-
-    autocomplete(document.getElementById("myInput"), countries);
-    const back = document.querySelector("#back_locationsOptions");
-
-    back.addEventListener('click', () => {
-        locationControl.classList.add('hide');
-        filters.classList.remove('hide');
-    });
-}
-*/
-
-const showAdminControl = (types) => {
+const showAdminControl = (types, ids) => {
     const map = document.querySelector('#map');
     const admin = document.querySelector('#adminControl');
     const openSideNav= document.querySelector('#control');
@@ -455,20 +392,6 @@ const showAdminControl = (types) => {
         admin.classList.add("hide");
         adminBtn.classList.remove("hide");
     });
-
-    /*
-    const showInfo = (index) =>{
-        if(descriptionAdmin[index].classList.contains('hide')){
-            descriptionAdmin[index].classList.remove("hide");
-            console.log("Saco la clase hide");
-            //downBtn.classList.add('rotate');
-        } else {
-            descriptionAdmin[index].classList.add('hide');
-            console.log("Agrego hide");
-            //downBtn.classList.remove('rotate');
-        }
-    }
-    */
     
     const showInfo = (index) =>{
         flag = true;
@@ -489,13 +412,37 @@ const showAdminControl = (types) => {
                 $check.setAttribute("data", "false");
         }
         */
+        const $editBtn = document.querySelector('#edit'+ids[index]);
         checkType(types[index], index);
+        const $form_field_lat = document.querySelector('#form_field_lat'+ids[index]);
+        const $form_field_lng = document.querySelector('#form_field_lng'+ids[index]);
+        const $form_field_description = document.querySelector('#form_field_description'+ids[index]);
+        const $form_field_name = document.querySelector('#form_field_name'+ids[index]);
+        const $form_field_website = document.querySelector('#form_field_website'+ids[index]);
+        const $form_field_image = document.querySelector('#form_field_image'+ids[index]);
+        const $form_field_country = document.querySelector('#form_field_country'+ids[index]);
+        const $radio_buttons = document.querySelectorAll('#selectType'+ids[index]+' > .inlineInput > input');
+        const $uploadImage = document.querySelector('#label'+ids[index]);
 
         if(descriptionAdmin[index].classList.contains('hide')){
             descriptionAdmin[index].classList.remove("hide");
         //downBtn.classList.add('rotate');
         } else {
             descriptionAdmin[index].classList.add('hide');
+            $editBtn.innerHTML = "Edit";
+            $form_field_lat.disabled = true;
+            $form_field_lng.disabled = true;
+            $form_field_description.disabled = true;
+            $form_field_name.disabled = true;
+            $form_field_website.disabled = true;
+            $form_field_image.disabled = true;
+            $form_field_country.disabled = true;
+            $radio_buttons.forEach(button =>{
+                button.disabled = true;
+            });
+            $uploadImage.classList.add("hide");
+
+            editBtnClick = true;
         //downBtn.classList.remove('rotate');
         }
     }

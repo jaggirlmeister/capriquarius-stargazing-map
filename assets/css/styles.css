@@ -371,7 +371,7 @@ input[type=text]:focus {
 #locationsOptions .inputDiv label{
     position: absolute;
     top: -10px;
-    pointer-events: none;
+    /*pointer-events: none;*/
     left:0%; 
     transition: .5s;
     font-size:1em;
@@ -450,7 +450,7 @@ textarea{
 
 .blur{
     filter: blur(4px);
-    transition: 2s;
+    /*transition: 2s;*/
 }
 
 /* LOADING */
@@ -577,7 +577,7 @@ a:hover{
 }
 
 #wrapper{
-padding: 60px 0 40px;
+/*padding: 60px 0 40px;*/
 background-color:rgba(3, 22, 73, 0.671);
 }
 
@@ -708,7 +708,79 @@ background: linear-gradient(0deg, rgba(1,53,91,1) 0%, rgba(0,212,255,0) 50%);
     margin-bottom:0;
 }
 
-.areYouSure{
+#adminTitle{
+    position:absolute;
+}
+
+/*
+input[type="file"]{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for="imageLocation"] {
+    margin-bottom:1em;
+}
+
+
+
+#imageContainer{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+#locationImage{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#uploadImage{
+    
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+*/
+
+.container{
+    position: relative;
+}
+
+.actualImage{
+    width: 500px;
+    height: auto;
+}
+
+.upload {
+    position: absolute;
+    width:40px;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+ }
+
+ .uploadLabel{
+    position: absolute !important;
+    transform: translate(-50%, -50%) !important;
+    -ms-transform: translate(-50%, -50%) !important;
+    top: 50% !important; 
+    left: 50% !important;
+ }
+
+ .wrong{
+    border-bottom: 2px solid #e73737;
+ }
+
+ .areYouSure{
     position: absolute;
     top: 50%;
     left: 50%;

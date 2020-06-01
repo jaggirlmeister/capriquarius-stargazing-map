@@ -31,7 +31,7 @@
                     <button>Yes</button>
                     <button>No</button>
                 </div>
-            </div>        
+            </div> 
             
             <div id="menu">
             
@@ -135,18 +135,104 @@
     </div>
 
     <div id="adminControl" class="hide">
-        
+     
         <div class="button" id="close">
             <img src="assets/images/close.svg" class="arrow">
         </div>
 
         <div id="wrapper">
             <div class="inner">
-                <div id="btn_add_wrapper">
-                    <a href="#" class="btn blue">Add item</a>
+
+                <div id="buttons">
+                    <div id="btn_add_wrapper">
+                        <a href="#" class="btn blue handleAdd">Add item</a>
+                    </div>
+                    <div id="list">
+                        <p>Loading!</p>
+                    </div>
                 </div>
-                <div id="list">
-                    <p>Loading!</p>
+                
+                <div id="addForm" class="hide">
+                    <div id="" class="adminDescription">
+                        <div id="formWrapper">
+                        <form id="addLocationForm" action="">
+                        <div id="locationsOptions">
+
+                        <div class="inputDiv" id="imageLocation">
+                            
+                                <div class="container">
+                                    <img id="addImg" class="actualImage" src="assets/images/default.png" alt="Image preview...">
+                                    <input type="file" id="addImgForm" name="file" value="" class="hide">
+                                    <label class="uploadLabel"  id="addLabel" for="addImgForm">  
+                                        <img src="/assets/images/upload.svg" id="uploadImage${_id}" class="upload">
+                                    </label>
+                                    <div class="editImage"></div>    
+                                </div>
+
+                            </div>
+        
+                        <div class="inputDiv latLng">
+                            <input id="addLat" type="text" name="lat" required="" value="">
+                            <label>Latitude</label>
+                        </div>
+        
+                        <div class="inputDiv latLng">
+                            <input id="addLng" type="text" name="lng" required="" value="">
+                            <label>Longitude</label>
+                        </div>
+        
+                        <div class="typeSelection" id="selectType">
+                            <div class="inlineInput">
+                                <input type="radio" id="National Park" name="type">
+                                <label for="natPark">National Park</label>
+                            </div>
+                            <div class="inlineInput">
+                                <input type="radio" id="Recreational Area" name="type">
+                                <label for="recArea">Recreational Area</label>
+                            </div>    
+                            <div class="inlineInput">
+                                <input type="radio" id="Nature Reserve" name="type">
+                                <label for="natRes">Natural Reserve</label>
+                            </div>
+                            <div class="inlineInput">
+                                <input type="radio" id="Observatory" name="type">
+                                <label for="obser">Observatory</label>
+                            </div>
+                            <div class="inlineInput">
+                                <input type="radio" id="Aurora" name="type">
+                                <label for="aurora">Aurora</label>
+                            </div>
+                        </div>
+        
+                        <div class="inputDiv">
+                            <input id="addName" type="text" name="name" required="" value="">
+                            <label>Name</label>
+                        </div>
+        
+                        <div class="inputDiv autocomplete">
+                            <input id="addCountry" type="text" name="myCountry" value="">
+                            <label>Country</label>
+                        </div>
+        
+                        <div class="inputDiv">
+                            <input type="text" id="addWebsite" name="" required="" value="">
+                            <label>Website</label>
+                        </div>
+        
+                        <div class="inputDiv">
+                            <textarea type="text" id="addDescription" name="description" required=""></textarea>
+                            <label>Description</label>
+                        </div>
+
+                        <button class="form_submit" class="btn azul" type="submit">Enviar</button>
+        
+                    </div>
+        
+                        
+                        </form>
+                    </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
