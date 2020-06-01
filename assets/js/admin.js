@@ -192,6 +192,9 @@ const editForm = (id, form) =>{
 
         $editBtn.innerHTML = "Cancel";
 
+        $image.src = saveImg;
+        saveImg = undefined;
+
         // Sacar atributos para poder editar
         $form_field_lat.removeAttribute('disabled');
         $form_field_lng.removeAttribute('disabled');

@@ -423,6 +423,7 @@ const showAdminControl = (types, ids) => {
         const $form_field_country = document.querySelector('#form_field_country'+ids[index]);
         const $radio_buttons = document.querySelectorAll('#selectType'+ids[index]+' > .inlineInput > input');
         const $uploadImage = document.querySelector('#label'+ids[index]);
+        const $image = document.querySelector('#img'+ids[index]);
 
         if(descriptionAdmin[index].classList.contains('hide')){
             descriptionAdmin[index].classList.remove("hide");
@@ -441,6 +442,9 @@ const showAdminControl = (types, ids) => {
                 button.disabled = true;
             });
             $uploadImage.classList.add("hide");
+
+            $image.src = saveImg;
+            saveImg = undefined;
 
             editBtnClick = true;
         //downBtn.classList.remove('rotate');
