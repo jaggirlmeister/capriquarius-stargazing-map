@@ -377,7 +377,7 @@ const showAdminControl = (types, ids) => {
     const adminBtn = document.querySelector('#controlAdmin');
     
     const downBtn = document.querySelectorAll('.down');
-    const descriptionAdmin = document.querySelectorAll('.adminDescription')
+    let descriptionAdmin = document.querySelectorAll('.adminDescription');
 
     openSideNav.classList.add("hide");
     sideNav.classList.add("hide");
@@ -394,24 +394,9 @@ const showAdminControl = (types, ids) => {
     });
     
     const showInfo = (index) =>{
+        
         flag = true;
-        /*
-        const $check = document.querySelector('#arrow-'+index);
-        const attr = $check.getAttribute("data");
-        const $div = document.querySelector('#data-'+index);
-
-        if(attr == "false"){
-            
-                $div.classList.remove("hide");
-                console.log($div)
-                $check.setAttribute("data", "true");
-                
-        } else{
-                $div.classList.add("hide");
-                console.log($div)
-                $check.setAttribute("data", "false");
-        }
-        */
+        
         const $editBtn = document.querySelector('#edit'+ids[index]);
         checkType(types[index], index);
         const $form_field_lat = document.querySelector('#form_field_lat'+ids[index]);
@@ -425,11 +410,21 @@ const showAdminControl = (types, ids) => {
         const $uploadImage = document.querySelector('#label'+ids[index]);
         const $image = document.querySelector('#img'+ids[index]);
 
-        if(descriptionAdmin[index].classList.contains('hide')){
-            descriptionAdmin[index].classList.remove("hide");
-        //downBtn.classList.add('rotate');
+        // Convierte el NodeList de divs en un array para poder aplicar el metodo splice
+        let locations = Array.from(descriptionAdmin);
+        let locationPicked = descriptionAdmin[index];
+        locations.splice(index, 1);
+
+        if(locationPicked.classList.contains('hide')){
+            // Abre el indicado
+            locationPicked.classList.remove("hide");
+            // Le pone la clase hide a todo el resto de los divs 
+            locations.forEach(anotherLocation => {
+                anotherLocation.classList.add("hide");
+            })
+
         } else {
-            descriptionAdmin[index].classList.add('hide');
+            locationPicked.classList.add('hide');
             $editBtn.innerHTML = "Edit";
             $form_field_lat.disabled = true;
             $form_field_lng.disabled = true;
@@ -443,8 +438,10 @@ const showAdminControl = (types, ids) => {
             });
             $uploadImage.classList.add("hide");
 
-            $image.src = saveImg;
-            saveImg = undefined;
+            if($editBtn.innerHTML == "Cancel"){
+                $image.src = saveImg;
+                saveImg = undefined;
+            }
 
             editBtnClick = true;
         //downBtn.classList.remove('rotate');
@@ -537,3 +534,20 @@ function autocomplete(inp, arr) {
   });
 }
 
+/*
+        const $check = document.querySelector('#arrow-'+index);
+        const attr = $check.getAttribute("data");
+        const $div = document.querySelector('#data-'+index);
+
+        if(attr == "false"){
+            
+                $div.classList.remove("hide");
+                console.log($div)
+                $check.setAttribute("data", "true");
+                
+        } else{
+                $div.classList.add("hide");
+                console.log($div)
+                $check.setAttribute("data", "false");
+        }
+        */
