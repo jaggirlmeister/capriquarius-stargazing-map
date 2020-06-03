@@ -9,8 +9,8 @@ const dataRow = (props, index) => {
     return `
         <div class="item">
             <div class="countriesAdmin">
-                <div id="arrow-${_id}" data="false" class="countriesAdmin">
-                    <img class="down" src="assets/images/down.svg" width="25px">
+                <div id="arrow-${_id}" class="countriesAdmin">
+                    <img class="down" data-id="${_id}" src="assets/images/down.svg" width="25px">
                 </div>
                 <div class="list_content">
                     <div>
@@ -23,7 +23,7 @@ const dataRow = (props, index) => {
             </div>
             <div class="btns_wrapper">
                 <a href="#" data-id="${_id}" id="edit${_id}" class="red btn handleEdit">Edit</a>
-                <a href="#" data-id="${_id}" class="green btn handleDelete">Delete</a>
+                <a href="#" data-id="${_id}" id="delete${_id}" class="green btn handleDelete">Delete</a>
             </div>
 
             <div id="data-${index}" data-info="info${_id}" class="adminDescription hide">
@@ -48,7 +48,7 @@ const dataRow = (props, index) => {
                             </div>
 
                             <div class="inputDiv latLng">
-                                <input id="form_field_lat${_id}" type="text" name="lat" disabled value="${lat}" onchange="validate(${_id})" required>
+                                <input id="form_field_lat${_id}" type="text" name="lat" disabled value="${lat}" required>
                                 <label>Latitude</label>
                             </div>
 
@@ -59,7 +59,7 @@ const dataRow = (props, index) => {
 
                             <div class="typeSelection" id="selectType${_id}">
                                 <div class="inlineInput">
-                                    <input type="radio" data-type="National Park" id="RNationalPark${index}" name="type" disabled>
+                                    <input type="radio" data-type="National Park" id="RNationalPark${index}" name="type" disabled required>
                                     <label for="natPark${_id}">National Park</label>
                                 </div>
                                 <div class="inlineInput">
@@ -100,7 +100,7 @@ const dataRow = (props, index) => {
                                 <label>Description</label>
                             </div>
 
-                            <button class="form_submit" class="btn azul" type="submit">Enviar</button>
+                            <button class="btn disabledState azul" id="form_button${_id}" type="submit" disabled>Enviar</button>
 
                         </div>
 
@@ -111,7 +111,6 @@ const dataRow = (props, index) => {
     `
 }
 
-
 const getLocations = async (id='') => {
     
     const result = await api.getLocations();
@@ -121,6 +120,18 @@ const getLocations = async (id='') => {
         result.forEach((element, index) => {
             $list.innerHTML += dataRow(element, index);
         });
+
+        const downBtn = document.querySelectorAll('.down');
+        let descriptionAdmin = document.querySelectorAll('.adminDescription');
+
+        // El flag que estabamos usando para que puedan abrir los divs ya no es necesario 
+        //if(flag == false){
+        downBtn.forEach((button,index) => {
+            button.addEventListener('click', (e) => { 
+                showLocationItem(index);
+            }); 
+        });
+        //} 
 
         const $btnsDelete = document.querySelectorAll('.handleDelete');
         $btnsDelete.forEach(element => {
@@ -138,10 +149,77 @@ const getLocations = async (id='') => {
     }
 }
 
+const showLocationItem = (index) =>{
+        
+    const id = event.target.dataset.id;
+    let descriptionAdmin = document.querySelectorAll('.adminDescription');
+    
+    // Convierte el NodeList de divs en un array para poder aplicar el metodo splice
+    let locations = Array.from(descriptionAdmin);
+    let locationPicked = descriptionAdmin[index];
+    locations.splice(index, 1);
+
+    checkType(types[index], index);
+
+    if(locationPicked.classList.contains('hide')){
+        // Abre el indicado
+        locationPicked.classList.remove("hide");
+        // Le pone la clase hide a todo el resto de los divs 
+        locations.forEach(anotherLocation => {
+            anotherLocation.classList.add("hide");
+        })
+    } else {
+        locationPicked.classList.add('hide');
+        blockEdit(id);
+    }
+}
+
+const blockEdit = (id) => {
+
+    const $form_field_lat = document.querySelector('#form_field_lat'+id);
+    const $form_field_lng = document.querySelector('#form_field_lng'+id);
+    const $form_field_description = document.querySelector('#form_field_description'+id);
+    const $form_field_name = document.querySelector('#form_field_name'+id);
+    const $form_field_website = document.querySelector('#form_field_website'+id);
+    const $form_field_image = document.querySelector('#form_field_image'+id);
+    const $form_field_country = document.querySelector('#form_field_country'+id);
+    const $form_button = document.querySelector("#form_button"+id);
+    const $radio_buttons = document.querySelectorAll('#selectType'+id+' > .inlineInput > input');
+    const $uploadImage = document.querySelector('#label'+id);
+    const $editBtn = document.querySelector('#edit'+id);
+    const $image = document.querySelector('#img'+id);
+    const $locationInfo = document.querySelector(`[data-info="info${id}"]`);
+    const $form = form;
+
+    //locationPicked.classList.add('hide');
+    $form_field_lat.disabled = true;
+    $form_field_lng.disabled = true;
+    $form_field_description.disabled = true;
+    $form_field_name.disabled = true;
+    $form_field_website.disabled = true;
+    $form_field_image.disabled = true;
+    $form_field_country.disabled = true;
+    $radio_buttons.forEach(button =>{
+        button.disabled = true;
+    });
+    $uploadImage.classList.add("hide");
+    $image.classList.remove("blur");
+
+    if($editBtn.innerHTML == "Cancel"){
+        $image.src = saveImg;
+        saveImg = undefined;
+    }
+
+    $editBtn.innerHTML = "Edit";
+    editBtnClick = true;   
+ 
+}
+
 getLocations();
 
+// Marca en los radio buttons el tipo de ubicación 
 const checkType = (type, index) =>{
-    type = type.replace(/\s+/g, '');
+    type = type.replace(/\s+/g, ''); // Saca el espacio para poder usarlo en como esta en el ID
     const typeRadioBtn = document.querySelector('#R'+type+index);
     typeRadioBtn.setAttribute("checked", "checked");
 }
@@ -151,7 +229,7 @@ const checkType = (type, index) =>{
 const updateLocation = async (data, id) => {
     const result = await api.updateLocations(data, id);
     console.log('Updated', result)
-    //fetchMarkers();
+    confirmation(id);
     getLocations();
 }
 
@@ -165,14 +243,25 @@ const editForm = (id, form) =>{
     const $form_field_website = document.querySelector('#form_field_website'+id);
     const $form_field_image = document.querySelector('#form_field_image'+id);
     const $form_field_country = document.querySelector('#form_field_country'+id);
+    const $form_button = document.querySelector("#form_button"+id);
     const $radio_buttons = document.querySelectorAll('#selectType'+id+' > .inlineInput > input');
     const $uploadImage = document.querySelector('#label'+id);
     const $editBtn = document.querySelector('#edit'+id);
     const $image = document.querySelector('#img'+id);
     const $locationInfo = document.querySelector(`[data-info="info${id}"]`);
     const $form = form;
+    let $descriptionAdminEdit = document.querySelectorAll('.adminDescription');
+    let $locationsEdit = Array.from($descriptionAdminEdit);
+
     let typeValue;
-    
+
+    // Elimina la ubicación actual del array de ubicaciones
+    const picked = $locationsEdit.find((element,index) => {
+        if(element === $locationInfo){
+            $locationsEdit.splice(index, 1);
+        }
+    });
+
     // Guarda la imagen de la ubicación para volverla a poner en caso de que se toque el botón "cancel"
     if(saveImg == undefined){
         saveImg = $image.src;
@@ -182,20 +271,20 @@ const editForm = (id, form) =>{
     $uploadImage.classList.remove("hide");
     $image.classList.add("blur");
 
-    // Cuando se toca el botón de Edit, se quita la clase Hide
+    // Muestra el formulario de la ubicación y oculta todo lo demás
     if($locationInfo.classList.contains('hide')){
         $locationInfo.classList.remove("hide");
+        $locationsEdit.forEach(anotherLocation => {
+            anotherLocation.classList.add("hide");
+        })
     } 
-
+  
     // Si el botón dice "Edit" (true) entonces se habilitan los campos del form
     if(editBtnClick == true){
 
         $editBtn.innerHTML = "Cancel";
-
-        $image.src = saveImg;
-        saveImg = undefined;
-
-        // Sacar atributos para poder editar
+        
+        // Habilita los inputs para poder editar
         $form_field_lat.removeAttribute('disabled');
         $form_field_lng.removeAttribute('disabled');
         $form_field_description.removeAttribute('disabled');
@@ -203,32 +292,23 @@ const editForm = (id, form) =>{
         $form_field_website.removeAttribute('disabled');
         $form_field_image.removeAttribute('disabled');
         $form_field_country.removeAttribute('disabled');
+        $form_button.removeAttribute('disabled');
+        $form_button.classList.remove('disabledState');
+        $form_button.classList.add('submit');
         $radio_buttons.forEach(button =>{
             button.removeAttribute('disabled');
         });
 
-        // Guardar valor elegido en los radio buttons 
+        // Guarda el valor elegido en los radio buttons 
         $radio_buttons.forEach(radioBtn =>{
             if(radioBtn.checked){
                 typeValue = radioBtn.dataset.type;
             }
         })
             
-        // Convertir imagen en base64  
+        // Convertir imagen en base64 para poder subirla a la base de datos 
         $form_field_image.addEventListener('change', ()=>{
-            var file = $form_field_image.files[0];
-            var reader = new FileReader();
-            
-            reader.onloadend = function () {
-                $image.src = reader.result;
-            }  
-            if (file) {
-                reader.readAsDataURL(file);
-                $image.src = file;
-                $image.classList.remove("blur");
-            } else {
-                $image.src = "";
-            }
+            convertToBase64(id);
         });
             
         // Enviar formulario a la base de datos
@@ -252,28 +332,15 @@ const editForm = (id, form) =>{
     } else { // Si el botón dice "Cancel" (false) entonces se deshabilitan los campos del form
 
         $editBtn.innerHTML = "Edit";
-
-        // Disabled a todos los input
-        $form_field_lat.disabled = true;
-        $form_field_lng.disabled = true;
-        $form_field_description.disabled = true;
-        $form_field_name.disabled = true;
-        $form_field_website.disabled = true;
-        $form_field_image.disabled = true;
-        $form_field_country.disabled = true;
-        $radio_buttons.forEach(button =>{
-            button.disabled = true;
-        });
-
-        $uploadImage.classList.add("hide");
-        $image.classList.remove("blur");
+        $form_button.disabled = true;
+        $form_button.classList.remove('submit');
+        $form_button.classList.add('disabledState');
 
         // Pone la imagen original si es que se toca el botón "cancel"
         $image.src = saveImg;
         saveImg = undefined;
- 
-        editBtnClick = true;
 
+        blockEdit(id);
     }
 }
 
@@ -281,6 +348,33 @@ const handleClickEdit = async () => {
     const id = event.target.dataset.id;
     const $form = document.querySelector('#adminForm'+id);
     editForm(id, $form);
+}
+
+const convertToBase64 = (id) => {
+
+    console.log("ALIVE");
+    const $form_field_image = document.querySelector('#form_field_image'+id);
+    console.log($form_field_image)
+    const $image = document.querySelector('#img'+id);
+    console.log($image)
+
+    var file = $form_field_image.files[0];
+    console.log(file)
+    var reader = new FileReader();
+    console.log(reader);
+            
+    reader.onloadend = function () {
+        $image.src = reader.result;
+    }  
+    if (file) {
+        reader.readAsDataURL(file);
+        $image.src = file;
+        console.log($image);
+        $image.classList.remove("blur");
+    } else {
+        $image.src = "";
+        console.log("HOLAAAAAAAAA" + $image);
+    }
 }
 
 // DELETE
@@ -291,12 +385,21 @@ const deleteLocation = async (id) => {
     getLocations();
 }
 
-/*
 const confirmation = (id) =>{
-    const $confirmationWindow = document.getElementById('#confirmationWindow');
-    $confirmationWindow.removeAttribute('hide');
+    const $confirmationWindow = document.querySelector('#confirmationWindow');
+    const $editConfirmation = document.querySelector('#editConfirmation');
+    const $delete_button = document.querySelector("#delete"+id);
+
+    $editConfirmation.classList.remove('hide');
+    setTimeout(function() {
+       $editConfirmation.classList.add('hide');
+    }, 2000);
+    reload();
+ 
+    $delete_button.addEventListener("click", () =>{
+        $confirmationWindow.classList.remove('hide');
+    });
 }
-*/
 
 const handleClickDelete = async () => {
     const id = event.target.dataset.id;
@@ -340,8 +443,6 @@ const form = () =>{
         radioBtn.addEventListener("click", ()=>{
             if(radioBtn.checked){
                 typeValue = radioBtn.getAttribute("id");
-                console.log("Hola2E2031");
-                console.log(typeValue);
             }
         })
         
@@ -375,9 +476,79 @@ const form = () =>{
             "description": $addDescription.value, 
             "type": typeValue
         }
+        //validate();
         createLocation(data);
+    });
+}
+
+const validate = () =>{ 
+    console.log("hola");
+    const $addLat = document.querySelector('#addLat');
+    const $addLng = document.querySelector('#addLng');
+    const $addDescription = document.querySelector('#addDescription');
+    const $addName = document.querySelector('#addName');
+    const $addWebsite = document.querySelector('#addWebsite');
+    const $addImgForm = document.querySelector('#addImgForm');
+    const $addCountry = document.querySelector('#addCountry');
+    const $addRadioButtons = document.querySelectorAll('#selectType > .inlineInput > input');
+    const $uploadImage = document.querySelector('#addLabel');
+    const $image = document.querySelector('#addImg');
+    const $addLocationForm = document.querySelector('#addLocationForm');
+
+
+    $addLocationForm.addEventListener('submit', (event) => {
+        
+        if($addLat == ""){
+            $addLat.classList.add("wrong");
+        }
+       
     });
 }
 
 $add_button.addEventListener('click', handleClickAdd)
 
+/*
+
+
+
+const createLocation = () =>{
+        form();
+};
+
+$add_button.addEventListener('click', createLocation);
+*/
+
+
+/*
+
+<div class="">
+        <div class="inlineInput">
+            <input type="radio" id="RNational Park${index}" name="type">
+            <label for="natPark${_id}">National Park</label>
+        </div>
+        <div class="inlineInput">
+            <input type="radio" id="RRecreational Area${index}" name="type">
+            <label for="recArea${_id}">Recreational Area</label>
+        </div>    
+        <div class="inlineInput">
+            <input type="radio" id="RNatural Reserve${index}" name="type">
+            <label for="natRes${_id}">Natural Reserve</label>
+        </div>
+        <div class="inlineInput">
+            <input type="radio" id="RObservatory${index}" name="type">
+            <label for="obser${_id}">Observatory</label>
+        </div>
+        <div class="inlineInput">
+            <input type="radio" id="RAurora${index}" name="type">
+            <label for="aurora${_id}">Aurora</label>
+        </div>
+    </div>
+
+
+
+    
+                                <img id="img${_id}" class="actualImage" src="${img}" alt="Image preview...">
+                                <img src="/assets/images/upload.svg" id="uploadImage${_id}" class="upload">  
+                                
+
+*/

@@ -1,7 +1,7 @@
 let markersAll = []; //array con todos los markers
 let infoWindows = []; //array con todas las infoWindow
 let countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
-let flag = false;
+
 let types = [];
 let ids = [];
 
@@ -375,10 +375,8 @@ const showAdminControl = (types, ids) => {
     const sideNav = document.querySelector('.search-box');
     const closeBtn = document.querySelector('#close');
     const adminBtn = document.querySelector('#controlAdmin');
-    
-    const downBtn = document.querySelectorAll('.down');
     let descriptionAdmin = document.querySelectorAll('.adminDescription');
-
+    
     openSideNav.classList.add("hide");
     sideNav.classList.add("hide");
     map.classList.add('blur');
@@ -392,70 +390,12 @@ const showAdminControl = (types, ids) => {
         admin.classList.add("hide");
         adminBtn.classList.remove("hide");
     });
-    
-    const showInfo = (index) =>{
-        
-        flag = true;
-        
-        const $editBtn = document.querySelector('#edit'+ids[index]);
-        checkType(types[index], index);
-        const $form_field_lat = document.querySelector('#form_field_lat'+ids[index]);
-        const $form_field_lng = document.querySelector('#form_field_lng'+ids[index]);
-        const $form_field_description = document.querySelector('#form_field_description'+ids[index]);
-        const $form_field_name = document.querySelector('#form_field_name'+ids[index]);
-        const $form_field_website = document.querySelector('#form_field_website'+ids[index]);
-        const $form_field_image = document.querySelector('#form_field_image'+ids[index]);
-        const $form_field_country = document.querySelector('#form_field_country'+ids[index]);
-        const $radio_buttons = document.querySelectorAll('#selectType'+ids[index]+' > .inlineInput > input');
-        const $uploadImage = document.querySelector('#label'+ids[index]);
-        const $image = document.querySelector('#img'+ids[index]);
 
-        // Convierte el NodeList de divs en un array para poder aplicar el metodo splice
-        let locations = Array.from(descriptionAdmin);
-        let locationPicked = descriptionAdmin[index];
-        locations.splice(index, 1);
+    // Oculta todos los items cada vez que se entra a la lista de ubicaciones
+    descriptionAdmin.forEach(item => {
+        item.classList.add("hide");
+    })
 
-        if(locationPicked.classList.contains('hide')){
-            // Abre el indicado
-            locationPicked.classList.remove("hide");
-            // Le pone la clase hide a todo el resto de los divs 
-            locations.forEach(anotherLocation => {
-                anotherLocation.classList.add("hide");
-            })
-
-        } else {
-            locationPicked.classList.add('hide');
-            $editBtn.innerHTML = "Edit";
-            $form_field_lat.disabled = true;
-            $form_field_lng.disabled = true;
-            $form_field_description.disabled = true;
-            $form_field_name.disabled = true;
-            $form_field_website.disabled = true;
-            $form_field_image.disabled = true;
-            $form_field_country.disabled = true;
-            $radio_buttons.forEach(button =>{
-                button.disabled = true;
-            });
-            $uploadImage.classList.add("hide");
-
-            if($editBtn.innerHTML == "Cancel"){
-                $image.src = saveImg;
-                saveImg = undefined;
-            }
-
-            editBtnClick = true;
-        //downBtn.classList.remove('rotate');
-        }
-    }
-
-    if(flag == false){
-        downBtn.forEach((button,index) => {
-            button.addEventListener('click', (e) => { 
-                showInfo(index);
-            }); 
-        });
-    } 
-       
 }
 
 // AUTOCOMPLETE

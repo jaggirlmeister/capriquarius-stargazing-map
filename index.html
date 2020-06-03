@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    
+
     <div class="button" id="control">
         <img src="assets/images/right-arrow.svg" class="arrow">
     </div>
@@ -25,15 +25,7 @@
         <div id="filtersMenu">
 
             <h2 class="title">Capriquarius Stargazing Map</h2>
-
-            <div id="confirmationWindow" class="hide">
-                <div class="areYouSure">
-                    <p>Are you sure you want to delete this location?</p>
-                    <button>Yes</button>
-                    <button>No</button>
-                </div>
-            </div> 
-            
+ 
             <div id="menu">
             
                 <p class="menuTitle">Filters</p>
@@ -142,6 +134,22 @@
         </div>
 
         <div id="wrapper">
+
+            <div id="confirmationWindow" class="confirmation hide">
+                <div class="areYouSure">
+                    <p>Are you sure you want to delete this location?</p>
+                    <button>Yes</button>
+                    <button>No</button>
+                </div>
+            </div> 
+
+            <div id="editConfirmation" class="confirmation hide">
+                <div class="areYouSure editStyle">
+                    <img src="assets/images/tick.svg" width="50px" alt="tick">
+                    <p>Edit complete succesfully</p>
+                </div>
+            </div>
+
             <div class="inner">
 
                 <div id="buttons">
@@ -154,7 +162,7 @@
                 </div>
                 
                 <div id="addForm" class="hide">
-                    <div id="" class="adminDescription">
+                    <div id="" class="another">
                         <div id="formWrapper">
                         <form id="addLocationForm" action="">
                         <div id="locationsOptions">
@@ -173,18 +181,18 @@
                             </div>
         
                         <div class="inputDiv latLng">
-                            <input id="addLat" type="text" name="lat" required="" value="">
+                            <input id="addLat" type="number" name="lat" value="">
                             <label>Latitude</label>
                         </div>
         
                         <div class="inputDiv latLng">
-                            <input id="addLng" type="text" name="lng" required="" value="">
+                            <input id="addLng" type="number" name="lng" required="" value="">
                             <label>Longitude</label>
                         </div>
         
                         <div class="typeSelection" id="selectType">
                             <div class="inlineInput">
-                                <input type="radio" id="National Park" name="type">
+                                <input type="radio" id="National Park" name="type" required> 
                                 <label for="natPark">National Park</label>
                             </div>
                             <div class="inlineInput">
@@ -216,7 +224,7 @@
                         </div>
         
                         <div class="inputDiv">
-                            <input type="text" id="addWebsite" name="" required="" value="">
+                            <input type="url" id="addWebsite" name="" required="" value="">
                             <label>Website</label>
                         </div>
         
@@ -225,7 +233,7 @@
                             <label>Description</label>
                         </div>
 
-                        <button class="form_submit" class="btn azul" type="submit">Enviar</button>
+                        <button class="btn azul submit" type="submit">Enviar</button>
         
                     </div>
         
