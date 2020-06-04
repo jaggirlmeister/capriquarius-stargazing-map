@@ -677,6 +677,8 @@ background: linear-gradient(0deg, rgba(1,53,91,1) 0%, rgba(0,212,255,0) 50%);
     left: 0;
     right: 0;
     font-family: Sen;
+    text-align: start;
+    margin:0 !important;
   }
 
   .autocomplete-items div {
