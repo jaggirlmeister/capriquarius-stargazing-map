@@ -427,7 +427,7 @@ const locationAdded = () =>{
 }
 
 const deleteConfirmation = (id) =>{
-    const $confirmationWindow = document.querySelector("#$confirmationWindow");
+    const $confirmationWindow = document.querySelector("#confirmationWindow");
     const $confirm = document.querySelector("#confirm");
     const $denied = document.querySelector("#denied");
 
