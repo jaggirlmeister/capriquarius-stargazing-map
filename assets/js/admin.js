@@ -111,50 +111,64 @@ const dataRow = (props, index) => {
     `
 }
 
-const getLocations = async (id='') => {
-    
+const getLocations = async (id='') => { 
+
     const result = await api.getLocations();
-    //console.log(result)
     if(id == ''){
         $list.innerHTML = '';
         result.forEach((element, index) => {
             $list.innerHTML += dataRow(element, index);
         });
-
-        const downBtn = document.querySelectorAll('.down');
-        let descriptionAdmin = document.querySelectorAll('.adminDescription');
-
-        // El flag que estabamos usando para que puedan abrir los divs ya no es necesario 
-        //if(flag == false){
-        downBtn.forEach((button,index) => {
-            button.addEventListener('click', (e) => { 
-                showLocationItem(index);
-            }); 
-        });
-        //} 
-
-        const $btnsDelete = document.querySelectorAll('.handleDelete');
-        $btnsDelete.forEach(element => {
-            element.addEventListener('click', handleClickDelete)
-        });
-
-        const $btnsEdit = document.querySelectorAll('.handleEdit');
-        $btnsEdit.forEach(element => {
-            element.addEventListener('click', handleClickEdit)
-        });
-
+        handleButtons(result);
     }else{
         const elementByID= result.find(el => id == el._id)
         return elementByID;
     }
+
+}
+
+const handleButtons = (result) =>{
+
+    const downBtn = document.querySelectorAll('.down');
+    downBtn.forEach((button,index) => {
+        button.addEventListener('click', (e) => { 
+            showLocationItem(index);
+        }); 
+    });
+
+    const $btnsDelete = document.querySelectorAll('.handleDelete');
+    $btnsDelete.forEach(element => {
+        element.addEventListener('click', handleClickDelete)
+    });
+
+    const $btnsEdit = document.querySelectorAll('.handleEdit');
+    $btnsEdit.forEach(element => {
+        element.addEventListener('click', handleClickEdit)
+    });
+
+    const $orderBtn = document.querySelector('#orderByName');
+    $orderBtn.addEventListener('click', ()=>{
+        orderByName(result);
+    });
+
+    const $orderBtnCountry = document.querySelector('#orderByCountry');
+    $orderBtnCountry.addEventListener('click', ()=>{
+        orderByCountry(result);
+    });
+
+    const $orderBtnDefault = document.querySelector('#orderByDefault');
+    $orderBtnDefault.addEventListener('click', ()=>{
+        getLocations();
+    });
+
 }
 
 const showLocationItem = (index) =>{
         
     const id = event.target.dataset.id;
+    const downBtn = document.querySelectorAll('.down');
     let descriptionAdmin = document.querySelectorAll('.adminDescription');
     
-    // Convierte el NodeList de divs en un array para poder aplicar el metodo splice
     let locations = Array.from(descriptionAdmin);
     let locationPicked = descriptionAdmin[index];
     locations.splice(index, 1);
@@ -162,16 +176,17 @@ const showLocationItem = (index) =>{
     checkType(types[index], index);
 
     if(locationPicked.classList.contains('hide')){
-        // Abre el indicado
         locationPicked.classList.remove("hide");
-        // Le pone la clase hide a todo el resto de los divs 
+        downBtn[index].classList.add("rotate");
         locations.forEach(anotherLocation => {
             anotherLocation.classList.add("hide");
         })
     } else {
         locationPicked.classList.add('hide');
+        downBtn[index].classList.remove("rotate");
         blockEdit(id);
     }
+
 }
 
 const blockEdit = (id) => {
@@ -217,9 +232,9 @@ const blockEdit = (id) => {
 
 getLocations();
 
-// Marca en los radio buttons el tipo de ubicación 
+ 
 const checkType = (type, index) =>{
-    type = type.replace(/\s+/g, ''); // Saca el espacio para poder usarlo en como esta en el ID
+    type = type.replace(/\s+/g, ''); 
     const typeRadioBtn = document.querySelector('#R'+type+index);
     typeRadioBtn.setAttribute("checked", "checked");
 }
@@ -230,6 +245,7 @@ const updateLocation = async (data, id) => {
     const result = await api.updateLocations(data, id);
     console.log('Updated', result)
     confirmation(id);
+    $list.innerHTML = '';
     getLocations();
 }
 
@@ -245,9 +261,11 @@ const editForm = (id, form) =>{
     const $form_field_country = document.querySelector('#form_field_country'+id);
     const $form_button = document.querySelector("#form_button"+id);
     const $radio_buttons = document.querySelectorAll('#selectType'+id+' > .inlineInput > input');
+    console.log($radio_buttons);
     const $uploadImage = document.querySelector('#label'+id);
     const $editBtn = document.querySelector('#edit'+id);
     const $image = document.querySelector('#img'+id);
+    const typeSelection = document.querySelector('#selectType'+id);
     const $locationInfo = document.querySelector(`[data-info="info${id}"]`);
     const $form = form;
     let $descriptionAdminEdit = document.querySelectorAll('.adminDescription');
@@ -305,6 +323,10 @@ const editForm = (id, form) =>{
                 typeValue = radioBtn.dataset.type;
             }
         })
+
+        typeSelection.addEventListener("click", ()=>{
+            typeValue = event.target.dataset.type;
+        })
             
         // Convertir imagen en base64 para poder subirla a la base de datos 
         $form_field_image.addEventListener('change', ()=>{
@@ -351,29 +373,21 @@ const handleClickEdit = async () => {
 }
 
 const convertToBase64 = (id) => {
-
-    console.log("ALIVE");
     const $form_field_image = document.querySelector('#form_field_image'+id);
-    console.log($form_field_image)
     const $image = document.querySelector('#img'+id);
-    console.log($image)
 
     var file = $form_field_image.files[0];
-    console.log(file)
     var reader = new FileReader();
-    console.log(reader);
-            
+          
     reader.onloadend = function () {
         $image.src = reader.result;
     }  
     if (file) {
         reader.readAsDataURL(file);
         $image.src = file;
-        console.log($image);
         $image.classList.remove("blur");
     } else {
         $image.src = "";
-        console.log("HOLAAAAAAAAA" + $image);
     }
 }
 
@@ -393,9 +407,8 @@ const confirmation = (id) =>{
     $editConfirmation.classList.remove('hide');
     setTimeout(function() {
        $editConfirmation.classList.add('hide');
-    }, 2000);
-    //reload();
- 
+    }, 1000);
+    
     $delete_button.addEventListener("click", () =>{
         $confirmationWindow.classList.remove('hide');
     });
@@ -503,6 +516,24 @@ const validate = () =>{
         }
        
     });
+}
+
+const orderByName = (elements) => {
+    elements.sort((a, b) => a.name.localeCompare(b.name));
+    $list.innerHTML = '';
+    elements.forEach((element, index) => {
+        $list.innerHTML += dataRow(element, index);
+    });
+    handleButtons();
+}
+
+const orderByCountry = (elements) => {
+    $list.innerHTML = "";
+    elements.sort((a, b) => a.country.localeCompare(b.country));
+    elements.forEach((element, index) => {
+        $list.innerHTML += dataRow(element, index);
+    });
+    handleButtons();
 }
 
 $add_button.addEventListener('click', handleClickAdd)
