@@ -146,6 +146,7 @@ const handleButtons = (result) =>{
         element.addEventListener('click', handleClickEdit)
     });
 
+    /*
     const $orderBtn = document.querySelector('#orderByName');
     $orderBtn.addEventListener('click', ()=>{
         orderByName(result);
@@ -160,7 +161,8 @@ const handleButtons = (result) =>{
     $orderBtnDefault.addEventListener('click', ()=>{
         getLocations();
     });
-
+    */
+   
 }
 
 const showLocationItem = (index) =>{
@@ -494,30 +496,7 @@ const form = () =>{
     });
 }
 
-const validate = () =>{ 
-    console.log("hola");
-    const $addLat = document.querySelector('#addLat');
-    const $addLng = document.querySelector('#addLng');
-    const $addDescription = document.querySelector('#addDescription');
-    const $addName = document.querySelector('#addName');
-    const $addWebsite = document.querySelector('#addWebsite');
-    const $addImgForm = document.querySelector('#addImgForm');
-    const $addCountry = document.querySelector('#addCountry');
-    const $addRadioButtons = document.querySelectorAll('#selectType > .inlineInput > input');
-    const $uploadImage = document.querySelector('#addLabel');
-    const $image = document.querySelector('#addImg');
-    const $addLocationForm = document.querySelector('#addLocationForm');
-
-
-    $addLocationForm.addEventListener('submit', (event) => {
-        
-        if($addLat == ""){
-            $addLat.classList.add("wrong");
-        }
-       
-    });
-}
-
+/*
 const orderByName = (elements) => {
     elements.sort((a, b) => a.name.localeCompare(b.name));
     $list.innerHTML = '';
@@ -534,7 +513,9 @@ const orderByCountry = (elements) => {
         $list.innerHTML += dataRow(element, index);
     });
     handleButtons();
+    
 }
+*/
 
 $add_button.addEventListener('click', handleClickAdd)
 
