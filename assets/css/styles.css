@@ -420,7 +420,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+button:hover {
     box-shadow: 0px 0px 7px 2px #5f86ce;
 }
 
