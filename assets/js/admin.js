@@ -439,6 +439,13 @@ const form = () =>{
     const $divList = document.querySelector("#addForm");
     $div.classList.add("hide");
     $divList.classList.remove("hide");
+    $backToList.classList.remove("hide");
+
+    $backToList.addEventListener("click", () => {
+        $div.classList.remove("hide");
+        $divList.classList.add("hide");
+        $backToList.classList.add("hide");
+    });
 
     const $addLat = document.querySelector('#addLat');
     const $addLng = document.querySelector('#addLng');
