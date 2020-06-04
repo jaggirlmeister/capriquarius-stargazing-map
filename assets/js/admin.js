@@ -437,6 +437,7 @@ const handleClickAdd = (event) => {
 const form = () =>{
     const $div = document.querySelector("#buttons");
     const $divList = document.querySelector("#addForm");
+    const $backToList = document.querySelector("#backToList"); 
     $div.classList.add("hide");
     $divList.classList.remove("hide");
     $backToList.classList.remove("hide");
