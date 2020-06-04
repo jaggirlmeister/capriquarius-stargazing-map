@@ -406,7 +406,7 @@ const deleteLocation = async (id) => {
 const confirmation = (id) =>{
     const $confirmationWindow = document.querySelector('#confirmationWindow');
     const $editConfirmation = document.querySelector('#editConfirmation');
-    const $delete_button = document.querySelector("#delete"+id);
+    
 
     $editConfirmation.classList.remove('hide');
     setTimeout(function() {
@@ -426,10 +426,27 @@ const locationAdded = () =>{
     }, 1000);
 }
 
+const deleteConfirmation = (id) =>{
+    const $delete_button = document.querySelector("#delete"+id);
+    const $confirm = document.querySelector("#confirm");
+    const $denied = document.querySelector("#denied");
+
+    $delete_button.addEventListener("click", () =>{
+        $confirmationWindow.classList.remove('hide');
+    });
+
+    $confirm.addEventListener("click", () =>{
+        deleteLocation(id);
+    });
+
+    $denied.addEventListener("click", () =>{
+        $confirmationWindow.classList.add('hide');
+    });
+}
+
 const handleClickDelete = async () => {
     const id = event.target.dataset.id;
-    deleteLocation(id);
-    //confirmation(id)
+    deleteConfirmation(id)
 }
 
 //CREATE
