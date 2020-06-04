@@ -307,6 +307,7 @@ option{
     flex-wrap: wrap;
     padding:2em 2em;
     justify-content: center;
+    padding: 2em 2em 11em 2em;
 }
 
 #locationsOptions div{
@@ -323,6 +324,12 @@ option{
 
 #formWrapper{
     text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#formWrapper form{
+    width: 80%;
 }
 
 .submitBtn{
@@ -631,6 +638,10 @@ background-color:rgba(3, 22, 73, 0.671);
     margin: auto;
 }
 
+#list{
+    padding-bottom: 14em;
+}
+
 #list .item{
     display: flex;
     justify-content: space-between;
@@ -756,6 +767,7 @@ label[for="imageLocation"] {
 .actualImage{
     width: 500px;
     height: auto;
+    border-radius: 1em;
 }
 
 .upload {
@@ -839,4 +851,17 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.actualImage{
+    height: 300px;
+    width: 500px;
+    border: 3px solid #91b4e8;
+    border-radius: 1em;
+    /* text-align: center; */
+    display: flex;
+    /* text-align: center; */
+    justify-content: center;
+    margin: 0 auto;
+    background-color: #8480801a;
 }

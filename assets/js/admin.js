@@ -394,7 +394,7 @@ const confirmation = (id) =>{
     setTimeout(function() {
        $editConfirmation.classList.add('hide');
     }, 2000);
-    reload();
+    //reload();
  
     $delete_button.addEventListener("click", () =>{
         $confirmationWindow.classList.remove('hide');
