@@ -904,3 +904,8 @@ input::-webkit-inner-spin-button {
 .websiteInput{
     margin-top:1em !important;
 }
+
+.deniedBtn{
+    color: #4d85ee;
+    background-color: white;
+}
