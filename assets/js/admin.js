@@ -90,7 +90,7 @@ const dataRow = (props, index) => {
                                 <label>Country</label>
                             </div>
 
-                            <div class="inputDiv">
+                            <div class="inputDiv websiteInput">
                                 <input type="text" id="form_field_website${_id}" name="" disabled value="${link}" required>
                                 <label>Website</label>
                             </div>
@@ -334,6 +334,8 @@ const editForm = (id, form) =>{
         $form_field_image.addEventListener('change', ()=>{
             convertToBase64(id);
         });
+
+        autocomplete($form_field_country, countries);
             
         // Enviar formulario a la base de datos
         $form.addEventListener('submit', (event) => {
@@ -416,6 +418,14 @@ const confirmation = (id) =>{
     });
 }
 
+const locationAdded = () =>{
+    const $locationAdded = document.querySelector('#locationAdded');
+    $locationAdded.classList.remove('hide');
+    setTimeout(function() {
+        $locationAdded.classList.add('hide');
+    }, 1000);
+}
+
 const handleClickDelete = async () => {
     const id = event.target.dataset.id;
     deleteLocation(id);
@@ -425,7 +435,8 @@ const handleClickDelete = async () => {
 //CREATE
 const createLocation = async (data) => {
     const result = await api.createLocation(data);
-    console.log('Created', result)
+    console.log('Created', result);
+    locationAdded();
     getLocations();
 }
 
@@ -470,6 +481,8 @@ const form = () =>{
         })
         
     })
+
+    autocomplete($addCountry, countries);
         
     // Convertir imagen en base64  
     $addImgForm.addEventListener('change', ()=>{
