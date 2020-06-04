@@ -815,7 +815,8 @@ label[for="imageLocation"] {
 }
 
 #confirmationWindow button{
-    padding: 1em;
+    padding: 1em 2em;
+    margin: 1em;
     background-color: #4d85ee;
     color: white;
     border: none;
@@ -906,6 +907,6 @@ input::-webkit-inner-spin-button {
 }
 
 .deniedBtn{
-    color: #4d85ee;
-    background-color: white;
+    color: #4d85ee !important;
+    background-color: white !important;
 }
