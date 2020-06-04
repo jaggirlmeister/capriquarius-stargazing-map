@@ -427,14 +427,12 @@ const locationAdded = () =>{
 }
 
 const deleteConfirmation = (id) =>{
-    const $delete_button = document.querySelector("#delete"+id);
+    const $confirmationWindow = document.querySelector("#$confirmationWindow");
     const $confirm = document.querySelector("#confirm");
     const $denied = document.querySelector("#denied");
 
-    $delete_button.addEventListener("click", () =>{
-        $confirmationWindow.classList.remove('hide');
-    });
-
+    $confirmationWindow.classList.remove('hide');
+    
     $confirm.addEventListener("click", () =>{
         deleteLocation(id);
     });
