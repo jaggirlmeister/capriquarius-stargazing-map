@@ -75,7 +75,7 @@ const dataRow = (props, index) => {
                                     <label for="obser${_id}">Observatory</label>
                                 </div>
                                 <div class="inlineInput">
-                                    <input type="radio" data-type="Aurora" id="RNorthernLights${index}" name="type" disabled>
+                                    <input type="radio" data-type="Northern Lights" id="RNorthernLights${index}" name="type" disabled>
                                     <label for="aurora${_id}">Aurora</label>
                                 </div>
                             </div>
