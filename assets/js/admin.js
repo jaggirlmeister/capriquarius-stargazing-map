@@ -433,7 +433,7 @@ const locationAdded = () =>{
     $locationAdded.classList.remove('hide');
     setTimeout(function() {
         $locationAdded.classList.add('hide');
-    }, 1000);
+    }, 2000);
 }
 
 const deleteConfirmation = (id) =>{
