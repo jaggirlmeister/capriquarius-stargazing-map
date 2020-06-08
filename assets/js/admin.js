@@ -121,7 +121,6 @@ const getLocations = async (id='') => {
             checkType(element, index);
         });
         handleButtons(result);
-        console.log("finish");
     }else{
         const elementByID= result.find(el => id == el._id)
         return elementByID;
@@ -148,6 +147,7 @@ const handleButtons = (result) =>{
         element.addEventListener('click', handleClickEdit)
     });
 
+    /*
     const $orderBtn = document.querySelector('#orderByName');
     $orderBtn.addEventListener('click', ()=>{
         orderByName(result);
@@ -162,7 +162,7 @@ const handleButtons = (result) =>{
     $orderBtnDefault.addEventListener('click', ()=>{
         getLocations();
     });
-    
+    */
    
 }
 
@@ -542,6 +542,7 @@ const form = () =>{
     });
 }
 
+/*
 const orderByName = (elements) => {
     elements.sort((a, b) => a.name.localeCompare(b.name));
     $list.innerHTML = '';
@@ -561,6 +562,7 @@ const orderByCountry = async (elements) => {
     });
     handleButtons();
 }
+*/
 
 $add_button.addEventListener('click', handleClickAdd)
 
