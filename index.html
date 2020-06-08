@@ -98,25 +98,6 @@
                 </a>
             </div>
 
-            <!--
-            <div id="controls">
-                <a href="" class="add">
-                    <img src="/assets/images/plus.png" alt="">
-                    <p>Add</p>
-                </a>
-                <a href="" class="edit">
-                    <img src="/assets/images/plus.png" alt="">
-                    <p>Edit</p>
-                </a>
-                <a href="" class="delete">
-                    <img src="/assets/images/plus.png" alt="">
-                    <p>Delete</p>
-                </a>
-            </div>
-            -->
-            
-            
-
         </div>
 
         <div id="locationInfo">
@@ -143,7 +124,7 @@
                 <div class="areYouSure">
                     <p>Are you sure you want to delete this location?</p>
                     <button id="confirm">Yes</button>
-                    <button id="denied" class="deniedBtn">No</button>
+                    <button id="denied">No</button>
                 </div>
             </div> 
 
@@ -154,11 +135,30 @@
                 </div>
             </div>
 
+            <div id="locationAdded" class="confirmation hide">
+                <div class="areYouSure editStyle">
+                    <img src="assets/images/tick.svg" width="50px" alt="tick">
+                    <p>Location added</p>
+                </div>
+            </div>
+
+
             <div class="inner">
 
                 <div id="buttons">
                     <div id="btn_add_wrapper">
                         <a href="#" class="btn blue handleAdd">Add item</a>
+                    </div>
+                    <div id="sortContainer">
+                        <div id="btn_order_by_name">
+                            <a href="#" id="orderByName">By name</a>
+                        </div>
+                        <div id="btn_order_by_name">
+                            <a href="#" id="orderByCountry">By country</a>
+                        </div>
+                        <div id="btn_order_by_default">
+                            <a href="#" id="orderByDefault">Default</a>
+                        </div>
                     </div>
                     <div id="list">
                         <p>Loading!</p>
@@ -173,8 +173,8 @@
 
                         <div class="inputDiv" id="imageLocation">
                             
-                                <div id='imgCont' class="container">
-                                    <img id="addImg" class="actualImage" src="" alt="">
+                                <div class="container">
+                                    <img id="addImg" class="actualImage" src="assets/images/default.png" alt="Image preview...">
                                     <input type="file" id="addImgForm" name="file" value="" class="hide">
                                     <label class="uploadLabel"  id="addLabel" for="addImgForm">  
                                         <img src="/assets/images/upload.svg" id="uploadImage${_id}" class="upload">
@@ -185,12 +185,12 @@
                             </div>
         
                         <div class="inputDiv latLng">
-                            <input id="addLat" type="text" name="lat" value="">
+                            <input id="addLat" type="text" name="lat" required value="">
                             <label>Latitude</label>
                         </div>
         
                         <div class="inputDiv latLng">
-                            <input id="addLng" type="text" name="lng" required="" value="">
+                            <input id="addLng" type="text" name="lng" required value="">
                             <label>Longitude</label>
                         </div>
         
@@ -212,7 +212,7 @@
                                 <label for="obser">Observatory</label>
                             </div>
                             <div class="inlineInput">
-                                <input type="radio" id="Northern Lights" name="type">
+                                <input type="radio" id="Aurora" name="type">
                                 <label for="aurora">Aurora</label>
                             </div>
                         </div>
@@ -223,12 +223,12 @@
                         </div>
         
                         <div class="inputDiv autocomplete">
-                            <input id="addCountry" type="text" name="myCountry" value="">
+                            <input id="addCountry" type="text" name="myCountry" required>
                             <label>Country</label>
                         </div>
         
-                        <div class="inputDiv  websiteInput">
-                            <input type="url" id="addWebsite" name="" required="" value="">
+                        <div class="inputDiv websiteInput">
+                            <input type="text" id="addWebsite" name="" required value="">
                             <label>Website</label>
                         </div>
         

@@ -10,7 +10,7 @@ const dataRow = (props, index) => {
         <div class="item">
             <div class="countriesAdmin">
                 <div id="arrow-${_id}" class="countriesAdmin">
-                    <img class="down" data-id="${_id}" src="assets/images/down.svg" width="25px">
+                    <img class="down" data-id="down${_id}" src="assets/images/down.svg" width="25px">
                 </div>
                 <div class="list_content">
                     <div>
@@ -118,8 +118,10 @@ const getLocations = async (id='') => {
         $list.innerHTML = '';
         result.forEach((element, index) => {
             $list.innerHTML += dataRow(element, index);
+            checkType(element, index);
         });
         handleButtons(result);
+        console.log("finish");
     }else{
         const elementByID= result.find(el => id == el._id)
         return elementByID;
@@ -146,7 +148,6 @@ const handleButtons = (result) =>{
         element.addEventListener('click', handleClickEdit)
     });
 
-    /*
     const $orderBtn = document.querySelector('#orderByName');
     $orderBtn.addEventListener('click', ()=>{
         orderByName(result);
@@ -161,7 +162,7 @@ const handleButtons = (result) =>{
     $orderBtnDefault.addEventListener('click', ()=>{
         getLocations();
     });
-    */
+    
    
 }
 
@@ -174,8 +175,6 @@ const showLocationItem = (index) =>{
     let locations = Array.from(descriptionAdmin);
     let locationPicked = descriptionAdmin[index];
     locations.splice(index, 1);
-
-    checkType(types[index], index);
 
     if(locationPicked.classList.contains('hide')){
         locationPicked.classList.remove("hide");
@@ -234,8 +233,8 @@ const blockEdit = (id) => {
 
 getLocations();
 
- 
-const checkType = (type, index) =>{
+const checkType = (element, index) =>{
+    let {type} = element;
     type = type.replace(/\s+/g, ''); 
     const typeRadioBtn = document.querySelector('#R'+type+index);
     typeRadioBtn.setAttribute("checked", "checked");
@@ -246,7 +245,7 @@ const checkType = (type, index) =>{
 const updateLocation = async (data, id) => {
     const result = await api.updateLocations(data, id);
     console.log('Updated', result)
-    confirmation(id);
+    confirmation();
     $list.innerHTML = '';
     getLocations();
 }
@@ -263,17 +262,26 @@ const editForm = (id, form) =>{
     const $form_field_country = document.querySelector('#form_field_country'+id);
     const $form_button = document.querySelector("#form_button"+id);
     const $radio_buttons = document.querySelectorAll('#selectType'+id+' > .inlineInput > input');
-    console.log($radio_buttons);
     const $uploadImage = document.querySelector('#label'+id);
     const $editBtn = document.querySelector('#edit'+id);
     const $image = document.querySelector('#img'+id);
     const typeSelection = document.querySelector('#selectType'+id);
     const $locationInfo = document.querySelector(`[data-info="info${id}"]`);
+    const $arrowBtn = document.querySelector(`[data-id="down${id}"]`);
+    const $btnsEdit = document.querySelectorAll('.handleEdit');
     const $form = form;
     let $descriptionAdminEdit = document.querySelectorAll('.adminDescription');
     let $locationsEdit = Array.from($descriptionAdminEdit);
-
+    let $downBtn = document.querySelectorAll('.down');
+    let $arrows = Array.from($downBtn);
     let typeValue;
+
+    // Elimina la ubicación actual del array de flechas
+    const currentArrow = $arrows.find((element,index) => {
+        if(element === $arrowBtn){
+            $arrows.splice(index, 1);
+        }
+    });
 
     // Elimina la ubicación actual del array de ubicaciones
     const picked = $locationsEdit.find((element,index) => {
@@ -291,12 +299,20 @@ const editForm = (id, form) =>{
     $uploadImage.classList.remove("hide");
     $image.classList.add("blur");
 
-    // Muestra el formulario de la ubicación y oculta todo lo demás
+    // Muestra el formulario de la ubicación y oculta, pone el nombre "Edit" y saca la clase "rotate" a todo lo demás
     if($locationInfo.classList.contains('hide')){
         $locationInfo.classList.remove("hide");
+        $arrowBtn.classList.add("rotate");
+        editBtnClick = true;
         $locationsEdit.forEach(anotherLocation => {
             anotherLocation.classList.add("hide");
         })
+        $arrows.forEach(arrow => {
+            arrow.classList.remove("rotate");
+        })
+        $btnsEdit.forEach(element => {
+            element.innerHTML = "Edit";
+        });
     } 
   
     // Si el botón dice "Edit" (true) entonces se habilitan los campos del form
@@ -403,19 +419,13 @@ const deleteLocation = async (id) => {
     getLocations();
 }
 
-const confirmation = (id) =>{
-    const $confirmationWindow = document.querySelector('#confirmationWindow');
+const confirmation = () =>{
     const $editConfirmation = document.querySelector('#editConfirmation');
     
-
     $editConfirmation.classList.remove('hide');
     setTimeout(function() {
        $editConfirmation.classList.add('hide');
-    }, 3000);
-    
-    $delete_button.addEventListener("click", () =>{
-        $confirmationWindow.classList.remove('hide');
-    });
+    }, 3000)
 }
 
 const locationAdded = () =>{
@@ -532,71 +542,25 @@ const form = () =>{
     });
 }
 
-/*
 const orderByName = (elements) => {
     elements.sort((a, b) => a.name.localeCompare(b.name));
     $list.innerHTML = '';
     elements.forEach((element, index) => {
         $list.innerHTML += dataRow(element, index);
+        checkType(element, index);
     });
     handleButtons();
 }
 
-const orderByCountry = (elements) => {
+const orderByCountry = async (elements) => {
     $list.innerHTML = "";
-    elements.sort((a, b) => a.country.localeCompare(b.country));
+    elements.sort((a, b) => a.country.localeCompare(b.country))
     elements.forEach((element, index) => {
         $list.innerHTML += dataRow(element, index);
+        checkType(element, index);
     });
     handleButtons();
-    
 }
-*/
 
 $add_button.addEventListener('click', handleClickAdd)
 
-/*
-
-
-
-const createLocation = () =>{
-        form();
-};
-
-$add_button.addEventListener('click', createLocation);
-*/
-
-
-/*
-
-<div class="">
-        <div class="inlineInput">
-            <input type="radio" id="RNational Park${index}" name="type">
-            <label for="natPark${_id}">National Park</label>
-        </div>
-        <div class="inlineInput">
-            <input type="radio" id="RRecreational Area${index}" name="type">
-            <label for="recArea${_id}">Recreational Area</label>
-        </div>    
-        <div class="inlineInput">
-            <input type="radio" id="RNatural Reserve${index}" name="type">
-            <label for="natRes${_id}">Natural Reserve</label>
-        </div>
-        <div class="inlineInput">
-            <input type="radio" id="RObservatory${index}" name="type">
-            <label for="obser${_id}">Observatory</label>
-        </div>
-        <div class="inlineInput">
-            <input type="radio" id="RAurora${index}" name="type">
-            <label for="aurora${_id}">Aurora</label>
-        </div>
-    </div>
-
-
-
-    
-                                <img id="img${_id}" class="actualImage" src="${img}" alt="Image preview...">
-                                <img src="/assets/images/upload.svg" id="uploadImage${_id}" class="upload">  
-                                
-
-*/
