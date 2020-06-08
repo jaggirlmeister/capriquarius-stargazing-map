@@ -10,7 +10,7 @@ const dataRow = (props, index) => {
         <div class="item">
             <div class="countriesAdmin">
                 <div id="arrow-${_id}" class="countriesAdmin">
-                    <img class="down" data-id="down${_id}" src="assets/images/down.svg" width="25px">
+                    <img class="down" data-id="${_id}" src="assets/images/down.svg" width="25px">
                 </div>
                 <div class="list_content">
                     <div>
@@ -38,7 +38,7 @@ const dataRow = (props, index) => {
                             
                                 <div class="container">
                                     <img id="img${_id}" class="actualImage" src="${img}" alt="Image preview...">
-                                    <input type="file" id="form_field_image${_id}" name="file" disabled value="${img}" class="hide">
+                                    <input type="file" id="form_field_image${_id}" name="file" disabled value="${img}" class="hide" required>
                                     <label class="uploadLabel hide"  id="label${_id}" for="form_field_image${_id}">  
                                         <img src="/assets/images/upload.svg" id="uploadImage${_id}" class="upload">
                                     </label>
@@ -267,7 +267,7 @@ const editForm = (id, form) =>{
     const $image = document.querySelector('#img'+id);
     const typeSelection = document.querySelector('#selectType'+id);
     const $locationInfo = document.querySelector(`[data-info="info${id}"]`);
-    const $arrowBtn = document.querySelector(`[data-id="down${id}"]`);
+    const $arrowBtn = document.querySelector(`[data-id="${id}"]`);
     const $btnsEdit = document.querySelectorAll('.handleEdit');
     const $form = form;
     let $descriptionAdminEdit = document.querySelectorAll('.adminDescription');

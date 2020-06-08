@@ -37,6 +37,7 @@ window.initMap = () => {
     const sideNav = document.querySelector('.search-box');
     const openSideNav= document.querySelector('#control');
     const defaultSelectorValue = document.querySelector('#default');
+    const allCountriesOption = document.querySelector('#allCountries');
 
     let panelState = true;
 
@@ -89,13 +90,24 @@ window.initMap = () => {
         infoWindows.forEach(infowindow => {
             infowindow.close();
         })
-        defaultSelectorValue.selected = true;
+        allCountriesOption.selected = true;
     })
-
+    
     // Filtro para los paises
     countryFilter.addEventListener('change', (e) => {
         e.preventDefault();
         addMarkerFilteredByCountry(countryFilter.value);
+
+        if(countryFilter.value == "All Countries"){
+            e.preventDefault();
+            allCountriesOption.selected = true;
+            markersAll.forEach(marker=>{
+                marker.setMap(map);
+            });
+            infoWindows.forEach(infowindow => {
+                infowindow.close();
+            })
+        }
     })
 
     // Agrega los markers filtrados por país
@@ -249,6 +261,7 @@ const addMarker = (map, marker) => {
             
     //Agrego mi nuevo marker (objeto marker, no json marker, a mi array para filtros)
     markersAll.push(markerItem);
+    
 }
 
 //Función que muestra la información del marker en el panel 
@@ -362,7 +375,7 @@ const showData = async (lat, lng) =>{
     `
 }
 
-const showAdminControl = () => {
+const showAdminControl = (types, ids) => {
     const map = document.querySelector('#map');
     const admin = document.querySelector('#adminControl');
     const openSideNav= document.querySelector('#control');
@@ -468,3 +481,20 @@ function autocomplete(inp, arr) {
   });
 }
 
+/*
+        const $check = document.querySelector('#arrow-'+index);
+        const attr = $check.getAttribute("data");
+        const $div = document.querySelector('#data-'+index);
+
+        if(attr == "false"){
+            
+                $div.classList.remove("hide");
+                console.log($div)
+                $check.setAttribute("data", "true");
+                
+        } else{
+                $div.classList.add("hide");
+                console.log($div)
+                $check.setAttribute("data", "false");
+        }
+        */

@@ -32,6 +32,7 @@
                 <div class="selectorCont">
                     <select class ="countriesSelector">
                         <option id="default" value="" hidden>Select country</option>
+                        <option id="allCountries" value="All Countries" selected>All Countries</option>
                         <option value="Antarctica">Antarctica</option>
                         <option value="Argentina">Argentina</option>
                         <option value="Australia">Australia</option>
@@ -177,7 +178,7 @@
                             
                                 <div class="container">
                                     <img id="addImg" class="actualImage" src="" alt="">
-                                    <input type="file" id="addImgForm" name="file" value="" class="hide">
+                                    <input type="file" id="addImgForm" name="file" value="" class="hide" required>
                                     <label class="uploadLabel"  id="addLabel" for="addImgForm">  
                                         <img src="/assets/images/upload.svg" id="uploadImage${_id}" class="upload">
                                     </label>
