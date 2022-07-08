@@ -29,7 +29,6 @@ const api = {
     getLocations: async() => {
         const dataResponse = await fetch(baseUrl + 'locations', fetchParams('GET'));
         const dataInfo = await dataResponse.json();
-
         return dataInfo;
     },
 
